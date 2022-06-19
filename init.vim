@@ -8,10 +8,11 @@ set smartcase
 set mouse=v                 " middle-click paste with 
 set nohlsearch              " highlight search 
 set incsearch               " incremental search
-set tabstop=4               " number of columns occupied by a tab 
-set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
+"set tabstop=4               " number of columns occupied by a tab 
+"set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
 set expandtab               " converts tabs to white space
-set shiftwidth=4            " width for autoindents
+set smarttab
+"set shiftwidth=4            " width for autoindents
 set noerrorbells
 set nowrap
 set hidden
@@ -205,7 +206,7 @@ end
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  filetypes = { "javascript","typescript", "typescriptreact", "typescript.tsx" },
   capabilities = capabilities
   }
 
