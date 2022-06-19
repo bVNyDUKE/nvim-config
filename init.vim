@@ -8,11 +8,11 @@ set smartcase
 set mouse=v                 " middle-click paste with 
 set nohlsearch              " highlight search 
 set incsearch               " incremental search
-"set tabstop=4               " number of columns occupied by a tab 
-"set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
+set tabstop=2               " number of columns occupied by a tab 
+set softtabstop=2           " see multiple spaces as tabstops so <BS> does the right thing
 set expandtab               " converts tabs to white space
 set smarttab
-"set shiftwidth=4            " width for autoindents
+set shiftwidth=2            " width for autoindents
 set noerrorbells
 set nowrap
 set hidden
@@ -53,6 +53,7 @@ call plug#begin('/home/kpanda/.config/nvim/plugged')
  Plug 'nvim-lualine/lualine.nvim'
  Plug 'kyazdani42/nvim-web-devicons'
  Plug 'airblade/vim-gitgutter'
+ Plug 'akinsho/toggleterm.nvim', {'tag': 'v1.*'}
 call plug#end()
 
 " Telescope
@@ -313,5 +314,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+
 EOF
 
+" ToggleTerm
+lua << EOF
+require('toggleterm').setup{
+open_mapping = [[<c-t>]],
+}
+
+EOF
