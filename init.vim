@@ -37,15 +37,13 @@ inoremap jj <Esc>
 nnoremap ; :
 nnoremap <leader>w <Cmd>update<CR>
 
-" Plugins 
-
 call plug#begin('/home/kpanda/.config/nvim/plugged')
-" Plugin Section
  Plug 'dracula/vim'
  Plug 'sonph/onehalf', {'rtp': 'vim/'}
  Plug 'EdenEast/nightfox.nvim'
- Plug 'neovim/nvim-lspconfig'                                   " lsp config
- Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    "tree sitter
+ Plug 'neovim/nvim-lspconfig'
+ Plug 'williamboman/nvim-lsp-installer'
+ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
  Plug 'nvim-lua/plenary.nvim'
@@ -54,13 +52,22 @@ call plug#begin('/home/kpanda/.config/nvim/plugged')
  Plug 'kyazdani42/nvim-web-devicons'
  Plug 'airblade/vim-gitgutter'
  Plug 'akinsho/toggleterm.nvim', {'tag': 'v1.*'}
+ Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+ Plug 'tpope/vim-fugitive'
 call plug#end()
+
+if (has('termguicolors'))
+ set termguicolors
+endif
+syntax enable
+colorscheme nightfox 
 
 " Telescope
 nnoremap <c-p> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 lua << EOF
 function telescope_buffer_dir()
   return vim.fn.expand('%:p:h')
@@ -82,18 +89,20 @@ telescope.setup{
     },
   }
 }
-EOF
 
-" color schemes
- if (has('termguicolors'))
- set termguicolors
- endif
- syntax enable
+-- IndentBlankline
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
 
-colorscheme nightfox 
+require("indent_blankline").setup {
+    char='|',
+    context_char = '|',
+    enabled = true,
+    show_current_context = true,
+    show_current_context_start = true,
+    show_end_of_line = true,
+}
 
-"Lualine
-lua << EOF
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -123,10 +132,7 @@ require('lualine').setup {
   tabline = {},
   extensions = {}
 }
-EOF
 
-" Webicons
-lua << EOF
 require'nvim-web-devicons'.setup {
  -- your personnal icons can go here (to override)
  -- you can specify color or cterm_color instead of specifying both of them
@@ -144,12 +150,11 @@ require'nvim-web-devicons'.setup {
  default = true;
 }
 
-EOF
 
-" Treesitter and LSP
-lua << EOF
+-- Treesitter and LSP
+
 local nvim_lsp = require('lspconfig')
-local protocol = require'vim.lsp.protocol'
+local protocol = require('vim.lsp.protocol')
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -165,6 +170,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   -- buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   -- formatting
@@ -205,21 +211,30 @@ local on_attach = function(client, bufnr)
   }
 end
 
+local lsp_flags = {
+  debounce_text_changes = 150,
+  }
+
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
-  filetypes = { "javascript","typescript", "typescriptreact", "typescript.tsx" },
-  capabilities = capabilities
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  capabilities = capabilities,
+  flags = lsp_flags,
   }
 
 nvim_lsp.intelephense.setup {
   on_attach = on_attach,
   filetypes = {"php"},
   cmd = {"intelephense", "--stdio"},
-  capabilities = capabilities
-  }
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+
+nvim_lsp.tailwindcss.setup{}
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
+  flags = lsp_flags,
   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
   init_options = {
     linters = {
@@ -263,8 +278,8 @@ nvim_lsp.diagnosticls.setup {
     },
     formatFiletypes = {
       css = 'prettier',
-      javascript = 'eslint_d',
-      javascriptreact = 'eslint_d',
+      javascript = 'prettier',
+      javascriptreact = 'prettier',
       json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
@@ -277,7 +292,7 @@ nvim_lsp.diagnosticls.setup {
 }
 
 require'nvim-treesitter.configs'.setup {
-     highlight = {
+    highlight = {
     enable = true,
     disable = {},
   },
@@ -304,7 +319,6 @@ require'nvim-treesitter.configs'.setup {
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
-    -- This sets the spacing and the prefix, obviously.
     virtual_text = {
       spacing = 4,
       prefix = ''
@@ -315,10 +329,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
 
-EOF
 
-" ToggleTerm
-lua << EOF
+-- ToggleTerm
 require('toggleterm').setup{
 open_mapping = [[<c-t>]],
 }
