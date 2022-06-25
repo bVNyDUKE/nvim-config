@@ -54,6 +54,7 @@ call plug#begin('/home/kpanda/.config/nvim/plugged')
  Plug 'akinsho/toggleterm.nvim', {'tag': 'v1.*'}
  Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
  Plug 'tpope/vim-fugitive'
+ Plug 'tpope/vim-surround'
 call plug#end()
 
 if (has('termguicolors'))
