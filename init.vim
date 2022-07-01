@@ -220,7 +220,6 @@ nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   capabilities = capabilities,
-  flags = lsp_flags,
   }
 
 nvim_lsp.intelephense.setup {
@@ -235,7 +234,6 @@ nvim_lsp.tailwindcss.setup{}
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
-  flags = lsp_flags,
   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
   init_options = {
     linters = {
@@ -273,8 +271,9 @@ nvim_lsp.diagnosticls.setup {
         rootPatterns = { '.git' },
       },
       prettier = {
-        command = 'prettier',
-        args = { '--stdin-filepath', '%filename' }
+        command = 'prettier_d_slim',
+        args = { '--stdin','--stdin-filepath', '%filename' },
+        rootPatterns = { '.git' },
       }
     },
     formatFiletypes = {
@@ -284,8 +283,8 @@ nvim_lsp.diagnosticls.setup {
       json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
-      typescript = 'eslint_d',
-      typescriptreact = 'eslint_d',
+      typescript = 'prettier',
+      typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
     }
