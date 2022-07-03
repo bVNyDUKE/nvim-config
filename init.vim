@@ -278,7 +278,7 @@ nvim_lsp.diagnosticls.setup {
         rootPatterns = { '.git' },
       },
       prettier = {
-        command = 'prettierd',
+        command = 'prettier',
         args = { '--stdin', '%filename' },
         rootPatterns = { '.git' },
       }
