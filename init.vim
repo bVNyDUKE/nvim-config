@@ -45,7 +45,6 @@ call plug#begin('/home/kpanda/.config/nvim/plugged')
  Plug 'neovim/nvim-lspconfig'
  Plug 'williamboman/nvim-lsp-installer'
  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
- Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
  Plug 'hrsh7th/cmp-nvim-lsp'
  Plug 'hrsh7th/cmp-buffer'
@@ -225,7 +224,7 @@ local lsp_flags = {
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  filetypes = {"javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
   capabilities = capabilities,
   }
 
@@ -279,7 +278,7 @@ nvim_lsp.diagnosticls.setup {
       },
       prettier = {
         command = 'prettier',
-        args = { '--stdin', '%filename' },
+        args = { '--stdin', '--stdin-filepath', '%filename' },
         rootPatterns = { '.git' },
       }
     },
@@ -357,10 +356,7 @@ require'nvim-treesitter.configs'.setup {
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
-    virtual_text = {
-      spacing = 4,
-      prefix = ''
-    }
+    virtual_text = false,
   }
 )
 
