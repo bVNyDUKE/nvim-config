@@ -28,6 +28,7 @@ set encoding=UTF-8
 set scrolloff=8
 set signcolumn=yes
 set updatetime=40
+set completeopt=menuone,noinsert,noselect
 filetype plugin indent on   "allow auto-indenting depending on file type
 filetype plugin on
 syntax on                   " syntax highlighting
@@ -46,6 +47,10 @@ call plug#begin('/home/kpanda/.config/nvim/plugged')
  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+ Plug 'hrsh7th/cmp-nvim-lsp'
+ Plug 'hrsh7th/cmp-buffer'
+ Plug 'hrsh7th/nvim-cmp'
+ Plug 'onsails/lspkind-nvim'
  Plug 'nvim-lua/plenary.nvim'
  Plug 'nvim-telescope/telescope.nvim'
  Plug 'nvim-lualine/lualine.nvim'
@@ -273,8 +278,8 @@ nvim_lsp.diagnosticls.setup {
         rootPatterns = { '.git' },
       },
       prettier = {
-        command = 'prettier_d_slim',
-        args = { '--stdin','--stdin-filepath', '%filename' },
+        command = 'prettierd',
+        args = { '--stdin', '%filename' },
         rootPatterns = { '.git' },
       }
     },
@@ -292,6 +297,37 @@ nvim_lsp.diagnosticls.setup {
     }
   }
 }
+
+local cmp = require'cmp'
+local lspkind = require'lspkind'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true
+    }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+  }, {
+    { name = 'buffer' },
+  }),
+  formatting = {
+    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+  }
+})
+
+vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
 
 require'nvim-treesitter.configs'.setup {
     highlight = {
