@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
     vim.api.nvim_command [[augroup END]]
   end
 
@@ -62,7 +62,7 @@ end
 
 local lsp_flags = {
   debounce_text_changes = 150,
-  }
+}
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
@@ -88,7 +88,7 @@ nvim_lsp.diagnosticls.setup {
     linters = {
       eslint = {
         command = 'eslint_d',
-        rootPatterns = { '.git' },
+        rootPatterns = { "package.json", ".eslintrc.js" },
         debounce = 100,
         args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
         sourceName = 'eslint_d',
@@ -117,12 +117,12 @@ nvim_lsp.diagnosticls.setup {
       eslint_d = {
         command = 'eslint_d',
         args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-        rootPatterns = { '.git' },
+        rootPatterns = { 'package.json', '.eslintrc.js' },
       },
       prettier = {
         command = 'prettier',
         args = { '--stdin', '--stdin-filepath', '%filename' },
-        rootPatterns = { '.git' },
+        rootPatterns = { 'package.json', '.eslintrc.js' },
       }
     },
     formatFiletypes = {
@@ -176,7 +176,7 @@ vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
-    virtual_text = false,
+    virtual_text = true,
   }
 )
 
