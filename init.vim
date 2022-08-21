@@ -1,6 +1,6 @@
- "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+"sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 "       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-"
+
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
