@@ -58,8 +58,10 @@ end
 
 require("null-ls").setup({
   sources = {
-      require("null-ls").builtins.diagnostics.eslint,
-      require("null-ls").builtins.formatting.eslint,
+      require("null-ls").builtins.diagnostics.eslint_d,
+      require("null-ls").builtins.formatting.eslint_d.with({
+        prefer_local = "node_modules/.bin",
+    }),
       require("null-ls").builtins.formatting.prettier,
   },
   diagnostics_format = "[#{s}] #{m}",
@@ -91,7 +93,6 @@ nvim_lsp.tailwindcss.setup{
 }
 
 nvim_lsp.volar.setup{
-  on_attach = on_attach,
   capabilities = capabilities,
   flags = lsp_flags,
 }
