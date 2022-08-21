@@ -2,6 +2,7 @@ local nvim_lsp = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
 
 require('nvim-lsp-installer').setup{}
+require('lsp-format').setup{}
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -23,12 +24,7 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   -- formatting
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({async = true})]]
-    vim.api.nvim_command [[augroup END]]
-  end
+  require "lsp-format".on_attach(client)
 
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
@@ -60,6 +56,16 @@ local on_attach = function(client, bufnr)
   }
 end
 
+require("null-ls").setup({
+  sources = {
+      require("null-ls").builtins.diagnostics.eslint,
+      require("null-ls").builtins.formatting.eslint,
+      require("null-ls").builtins.formatting.prettier,
+  },
+  diagnostics_format = "[#{s}] #{m}",
+  on_attach = on_attach,
+})
+
 local lsp_flags = {
   debounce_text_changes = 150,
 }
@@ -88,67 +94,6 @@ nvim_lsp.volar.setup{
   on_attach = on_attach,
   capabilities = capabilities,
   flags = lsp_flags,
-}
-
-nvim_lsp.diagnosticls.setup {
-  on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
-  init_options = {
-    linters = {
-      eslint = {
-        command = './node_modules/.bin/eslint',
-        rootPatterns = { "package.json", ".eslintrc.json", ".eslintrc.js" },
-        debounce = 40,
-        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint',
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          column = 'column',
-          endLine = 'endLine',
-          endColumn = 'endColumn',
-          message = '[eslint] ${message} [${ruleId}]',
-          security = 'severity'
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning'
-        }
-      },
-    },
-    filetypes = {
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      typescript = 'eslint',
-      typescriptreact = 'eslint',
-    },
-    formatters = {
-      eslint = {
-        command = './node_modules/.bin/eslint',
-        sourceName = 'eslint',
-        args = {'--stdin', '--stdin-filename', '%filepath', '--fix-dry-run',},
-        rootPatterns = { 'package.json', '.eslintrc.js' },
-      },
-      prettier = {
-        command = 'prettier',
-        sourceName = 'prettier',
-        args = { '--stdin', '--stdin-filepath', '%filepath' },
-        rootPatterns = { 'package.json', '.prettierrc' },
-      }
-    },
-    formatFiletypes = {
-      css = 'prettier',
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      json = 'prettier',
-      scss = 'prettier',
-      less = 'prettier',
-      typescript = 'eslint',
-      typescriptreact = 'eslint',
-      json = 'prettier',
-      markdown = 'prettier',
-    }
-  }
 }
 
 local cmp = require'cmp'

@@ -17,6 +17,8 @@ vim.call('plug#begin','/home/kpanda/.config/nvim/plugged')
   Plug 'williamboman/nvim-lsp-installer'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'lukas-reineke/lsp-format.nvim'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'onsails/lspkind-nvim'
