@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({async = true})]]
     vim.api.nvim_command [[augroup END]]
   end
 
@@ -79,7 +79,16 @@ nvim_lsp.intelephense.setup {
   flags = lsp_flags,
 }
 
-nvim_lsp.tailwindcss.setup{}
+nvim_lsp.tailwindcss.setup{
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+
+nvim_lsp.volar.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
@@ -87,11 +96,11 @@ nvim_lsp.diagnosticls.setup {
   init_options = {
     linters = {
       eslint = {
-        command = 'eslint_d',
-        rootPatterns = { "package.json", ".eslintrc.js" },
-        debounce = 100,
+        command = './node_modules/.bin/eslint',
+        rootPatterns = { "package.json", ".eslintrc.json", ".eslintrc.js" },
+        debounce = 40,
         args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint_d',
+        sourceName = 'eslint',
         parseJson = {
           errorsRoot = '[0].messages',
           line = 'line',
@@ -114,26 +123,28 @@ nvim_lsp.diagnosticls.setup {
       typescriptreact = 'eslint',
     },
     formatters = {
-      eslint_d = {
-        command = 'eslint_d',
-        args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
+      eslint = {
+        command = './node_modules/.bin/eslint',
+        sourceName = 'eslint',
+        args = {'--stdin', '--stdin-filename', '%filepath', '--fix-dry-run',},
         rootPatterns = { 'package.json', '.eslintrc.js' },
       },
       prettier = {
         command = 'prettier',
-        args = { '--stdin', '--stdin-filepath', '%filename' },
-        rootPatterns = { 'package.json', '.eslintrc.js' },
+        sourceName = 'prettier',
+        args = { '--stdin', '--stdin-filepath', '%filepath' },
+        rootPatterns = { 'package.json', '.prettierrc' },
       }
     },
     formatFiletypes = {
       css = 'prettier',
-      javascript = 'prettier',
-      javascriptreact = 'prettier',
+      javascript = 'eslint',
+      javascriptreact = 'eslint',
       json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
-      typescript = 'prettier',
-      typescriptreact = 'prettier',
+      typescript = 'eslint',
+      typescriptreact = 'eslint',
       json = 'prettier',
       markdown = 'prettier',
     }
