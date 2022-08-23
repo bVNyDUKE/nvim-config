@@ -1,6 +1,7 @@
 local nvim_lsp = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
 
+require('luasnip').setup{}
 require('nvim-lsp-installer').setup{}
 require('lsp-format').setup{}
 
@@ -22,6 +23,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   -- buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+
+  -- colorizer
+  if client.server_capabilities.colorProvider then
+    require "document-color".buf_attach(bufnr)
+  end
 
   -- formatting
   require "lsp-format".on_attach(client)
@@ -56,47 +62,6 @@ local on_attach = function(client, bufnr)
   }
 end
 
-require("null-ls").setup({
-  sources = {
-      require("null-ls").builtins.diagnostics.eslint_d,
-      require("null-ls").builtins.formatting.eslint_d.with({
-        prefer_local = "node_modules/.bin",
-    }),
-      require("null-ls").builtins.formatting.prettier,
-  },
-  diagnostics_format = "[#{s}] #{m}",
-  on_attach = on_attach,
-})
-
-local lsp_flags = {
-  debounce_text_changes = 150,
-}
-
-nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  filetypes = {"javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
-
-nvim_lsp.intelephense.setup {
-  on_attach = on_attach,
-  filetypes = {"php"},
-  cmd = {"intelephense", "--stdio"},
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
-
-nvim_lsp.tailwindcss.setup{
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
-
-nvim_lsp.volar.setup{
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
-
 local cmp = require'cmp'
 local lspkind = require'lspkind'
 
@@ -118,7 +83,8 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help'}
+    { name = 'nvim_lsp_signature_help'},
+    { name = 'luasnip'},
   }, {
     { name = 'buffer' },
   }),
@@ -128,6 +94,61 @@ cmp.setup({
 })
 
 vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+capabilities.textDocument.colorProvider = {
+  dynamicRegistration = true
+}
+
+require("null-ls").setup({
+  sources = {
+      require("null-ls").builtins.diagnostics.eslint_d,
+      require("null-ls").builtins.diagnostics.phpstan.with({
+        prefer_local = "vendor/bin/"
+      }),
+      require("null-ls").builtins.formatting.eslint_d.with({
+        prefer_local = "node_modules/.bin",
+      }),
+      require("null-ls").builtins.formatting.prettier,
+  },
+  diagnostics_format = "[#{s}] #{m}",
+  on_attach = on_attach,
+})
+
+local lsp_flags = {
+  debounce_text_changes = 150,
+}
+
+nvim_lsp.tsserver.setup {
+  on_attach = on_attach,
+  filetypes = {"javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+
+nvim_lsp.intelephense.setup {
+  init_options = {
+    globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+  },
+  on_attach = on_attach,
+  filetypes = {"php"},
+  cmd = {"intelephense", "--stdio"},
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+
+nvim_lsp.tailwindcss.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+
+nvim_lsp.volar.setup{
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+
 
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

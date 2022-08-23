@@ -5,6 +5,7 @@ vim.call('plug#begin','/home/kpanda/.config/nvim/plugged')
 --Plug 'dracula/vim'
 --Plug('sonph/onehalf', {rtp = 'vim/'})
   Plug 'EdenEast/nightfox.nvim'
+  Plug 'mrshmllow/document-color'
   Plug('nvim-treesitter/nvim-treesitter', {['do'] = function()
     vim.cmd(':TSUpdate')
     end
@@ -23,6 +24,7 @@ vim.call('plug#begin','/home/kpanda/.config/nvim/plugged')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'onsails/lspkind-nvim'
   Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+  Plug 'L3MON4D3/LuaSnip'
   Plug 'neovim/nvim-lspconfig'
   Plug('glepnir/lspsaga.nvim', { branch = 'main' })
 
