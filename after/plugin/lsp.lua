@@ -22,7 +22,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  -- buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   -- colorizer
   if client.server_capabilities.colorProvider then
@@ -89,13 +89,16 @@ cmp.setup({
     { name = 'buffer' },
   }),
   formatting = {
-    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+    format = lspkind.cmp_format({
+      with_text = false,
+      maxwidth = 50
+    })
   }
 })
 
 vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').update_capabilities(protocol.make_client_capabilities())
 
 capabilities.textDocument.colorProvider = {
   dynamicRegistration = true
@@ -103,7 +106,9 @@ capabilities.textDocument.colorProvider = {
 
 require("null-ls").setup({
   sources = {
-      require("null-ls").builtins.diagnostics.eslint_d,
+      require("null-ls").builtins.diagnostics.eslint_d.with({
+        prefer_local = "node_modules/.bin",
+      }),
       require("null-ls").builtins.diagnostics.phpstan.with({
         prefer_local = "vendor/bin/"
       }),
@@ -128,14 +133,14 @@ nvim_lsp.tsserver.setup {
 }
 
 nvim_lsp.intelephense.setup {
-  init_options = {
-    globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
-  },
   on_attach = on_attach,
   filetypes = {"php"},
   cmd = {"intelephense", "--stdio"},
   capabilities = capabilities,
   flags = lsp_flags,
+  init_options = {
+    globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+  },
 }
 
 nvim_lsp.tailwindcss.setup{

@@ -5,6 +5,7 @@ vim.call('plug#begin','/home/kpanda/.config/nvim/plugged')
 --Plug 'dracula/vim'
 --Plug('sonph/onehalf', {rtp = 'vim/'})
   Plug 'EdenEast/nightfox.nvim'
+  Plug('folke/tokyonight.nvim', { branch = 'main'})
   Plug 'mrshmllow/document-color'
   Plug('nvim-treesitter/nvim-treesitter', {['do'] = function()
     vim.cmd(':TSUpdate')
@@ -33,10 +34,12 @@ vim.call('plug#begin','/home/kpanda/.config/nvim/plugged')
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'airblade/vim-gitgutter'
-  Plug('akinsho/toggleterm.nvim', { tag = 'v1.*'})
+  --Plug('akinsho/toggleterm.nvim', { tag = 'v1.*'})
+  Plug 'numToStr/FTerm.nvim'
   Plug('lukas-reineke/indent-blankline.nvim', {branch = 'lua'})
 
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
 
 vim.call('plug#end')

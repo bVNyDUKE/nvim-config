@@ -1,4 +1,4 @@
-require('toggleterm').setup{
-  open_mapping = [[<c-t>]],
-}
+--require('toggleterm').setup{
+--  open_mapping = [[<c-t>]],
+--}
 

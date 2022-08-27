@@ -28,6 +28,7 @@ set.signcolumn = "yes"
 set.updatetime = 40
 set.completeopt = "menuone,noinsert,noselect"
 set.termguicolors = true
+set.pumheight = 10
 vim.cmd [[
   filetype plugin indent on
   filetype plugin on
