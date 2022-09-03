@@ -104,18 +104,19 @@ capabilities.textDocument.colorProvider = {
   dynamicRegistration = true
 }
 
-require("null-ls").setup({
+local null_ls = require("null-ls")
+null_ls.setup({
   sources = {
-      require("null-ls").builtins.diagnostics.eslint_d.with({
+      null_ls.builtins.diagnostics.eslint_d.with({
         prefer_local = "node_modules/.bin",
       }),
-      require("null-ls").builtins.diagnostics.phpstan.with({
-        prefer_local = "vendor/bin/"
+      null_ls.builtins.diagnostics.phpstan.with({
+        prefer_local = "vendor/bin",
+        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+        to_temp_file = false,
+        timeout = 20000,
       }),
-      require("null-ls").builtins.formatting.eslint_d.with({
-        prefer_local = "node_modules/.bin",
-      }),
-      require("null-ls").builtins.formatting.prettier,
+      null_ls.builtins.formatting.phpcsfixer,
   },
   diagnostics_format = "[#{s}] #{m}",
   on_attach = on_attach,
@@ -152,6 +153,16 @@ nvim_lsp.tailwindcss.setup{
 nvim_lsp.volar.setup{
   capabilities = capabilities,
   flags = lsp_flags,
+  init_options = {
+     documentFeatures = {
+        documentColor = false,
+        documentFormatting = false,
+        documentSymbol = true,
+        foldingRange = true,
+        linkedEditingRange = true,
+        selectionRange = true
+    }
+  }
 }
 
 
