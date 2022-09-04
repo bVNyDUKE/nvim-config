@@ -32,8 +32,9 @@ vim.call('plug#begin','/home/kpanda/.config/nvim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-lualine/lualine.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'airblade/vim-gitgutter'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'kyazdani42/nvim-tree.lua'
   --Plug('akinsho/toggleterm.nvim', { tag = 'v1.*'})
   Plug 'numToStr/FTerm.nvim'
   Plug('lukas-reineke/indent-blankline.nvim', {branch = 'lua'})

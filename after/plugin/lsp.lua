@@ -110,6 +110,9 @@ null_ls.setup({
       null_ls.builtins.diagnostics.eslint_d.with({
         prefer_local = "node_modules/.bin",
       }),
+      null_ls.builtins.formatting.eslint_d.with({
+        prefer_local = "node_modules/.bin",
+      }),
       null_ls.builtins.diagnostics.phpstan.with({
         prefer_local = "vendor/bin",
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -153,16 +156,6 @@ nvim_lsp.tailwindcss.setup{
 nvim_lsp.volar.setup{
   capabilities = capabilities,
   flags = lsp_flags,
-  init_options = {
-     documentFeatures = {
-        documentColor = false,
-        documentFormatting = false,
-        documentSymbol = true,
-        foldingRange = true,
-        linkedEditingRange = true,
-        selectionRange = true
-    }
-  }
 }
 
 
