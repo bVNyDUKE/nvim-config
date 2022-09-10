@@ -1,19 +1,20 @@
 local nvim_lsp = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
 
-require('luasnip').setup{}
-require('nvim-lsp-installer').setup{}
-require('lsp-format').setup{}
+require('luasnip').setup {}
+require('nvim-lsp-installer').setup {}
+require('lsp-format').setup {}
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   --Enable completion triggered by <c-x><c-o>
   --buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -62,8 +63,8 @@ local on_attach = function(client, bufnr)
   }
 end
 
-local cmp = require'cmp'
-local lspkind = require'lspkind'
+local cmp = require 'cmp'
+local lspkind = require 'lspkind'
 
 cmp.setup({
   snippet = {
@@ -83,8 +84,8 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help'},
-    { name = 'luasnip'},
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'luasnip' },
   }, {
     { name = 'buffer' },
   }),
@@ -107,19 +108,19 @@ capabilities.textDocument.colorProvider = {
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-      null_ls.builtins.diagnostics.eslint_d.with({
-        prefer_local = "node_modules/.bin",
-      }),
-      null_ls.builtins.formatting.eslint_d.with({
-        prefer_local = "node_modules/.bin",
-      }),
-      null_ls.builtins.diagnostics.phpstan.with({
-        prefer_local = "vendor/bin",
-        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-        to_temp_file = false,
-        timeout = 20000,
-      }),
-      null_ls.builtins.formatting.phpcsfixer,
+    null_ls.builtins.diagnostics.eslint_d.with({
+      prefer_local = "node_modules/.bin",
+    }),
+    null_ls.builtins.formatting.eslint_d.with({
+      prefer_local = "node_modules/.bin",
+    }),
+    null_ls.builtins.diagnostics.phpstan.with({
+      prefer_local = "vendor/bin",
+      method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+      to_temp_file = false,
+      timeout = 20000,
+    }),
+    null_ls.builtins.formatting.phpcsfixer,
   },
   diagnostics_format = "[#{s}] #{m}",
   on_attach = on_attach,
@@ -131,15 +132,15 @@ local lsp_flags = {
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
-  filetypes = {"javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
   capabilities = capabilities,
   flags = lsp_flags,
 }
 
 nvim_lsp.intelephense.setup {
   on_attach = on_attach,
-  filetypes = {"php"},
-  cmd = {"intelephense", "--stdio"},
+  filetypes = { "php" },
+  cmd = { "intelephense", "--stdio" },
   capabilities = capabilities,
   flags = lsp_flags,
   init_options = {
@@ -147,23 +148,24 @@ nvim_lsp.intelephense.setup {
   },
 }
 
-nvim_lsp.tailwindcss.setup{
+nvim_lsp.tailwindcss.setup {}
+
+nvim_lsp.volar.setup {
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
+
+nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
+  filetypes = { "lua" },
   capabilities = capabilities,
-  flags = lsp_flags,
+  flags = lsp_flags
 }
-
-nvim_lsp.volar.setup{
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
-
 
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = true,
-  }
+  underline = true,
+  virtual_text = true,
+}
 )
-
