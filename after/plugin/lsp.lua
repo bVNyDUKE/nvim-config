@@ -2,7 +2,16 @@ local nvim_lsp = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
 
 require('luasnip').setup {}
-require('nvim-lsp-installer').setup {}
+require('mason').setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
+    }
+  }
+})
+require('mason-lspconfig').setup()
 require('lsp-format').setup {}
 
 local on_attach = function(client, bufnr)
