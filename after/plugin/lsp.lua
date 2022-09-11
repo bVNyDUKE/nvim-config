@@ -1,6 +1,7 @@
 local nvim_lsp = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
 
+require('nvim-autopairs').setup {}
 require('luasnip').setup {}
 require('mason').setup({
   ui = {
@@ -14,25 +15,22 @@ require('mason').setup({
 require('mason-lspconfig').setup()
 require('lsp-format').setup {}
 
+local locopts = { noremap = true, silent = true }
+vim.keymap.set('n', ']g', vim.diagnostic.goto_next, locopts)
+vim.keymap.set('n', '[g', vim.diagnostic.goto_prev, locopts)
+
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  --local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  --Enable completion triggered by <c-x><c-o>
-  --buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap = true, silent = true }
+  local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  -- see `:help vim.lsp.*` for documentation on any of the below functions
+  vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
 
   -- colorizer
   if client.server_capabilities.colorProvider then
@@ -95,8 +93,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
-  }, {
-    { name = 'buffer' },
   }),
   formatting = {
     format = lspkind.cmp_format({
@@ -157,18 +153,36 @@ nvim_lsp.intelephense.setup {
   },
 }
 
-nvim_lsp.tailwindcss.setup {}
+nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
 
 nvim_lsp.volar.setup {
   capabilities = capabilities,
   flags = lsp_flags,
+  settings = {
+    volar = {
+      takeOverMode = {
+        enabled = true
+      }
+    }
+  }
 }
 
 nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
   filetypes = { "lua" },
   capabilities = capabilities,
-  flags = lsp_flags
+  flags = lsp_flags,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    }
+  }
 }
 
 -- icon

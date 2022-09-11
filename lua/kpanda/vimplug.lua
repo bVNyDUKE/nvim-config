@@ -11,12 +11,9 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
   vim.cmd(':TSUpdate')
 end
 })
-Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = function()
-  vim.cmd('cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build')
-end
-})
+Plug 'windwp/nvim-autopairs'
+
 --LSP
--- Plug 'williamboman/nvim-lsp-installer'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
