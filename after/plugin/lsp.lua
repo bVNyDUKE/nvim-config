@@ -156,7 +156,6 @@ nvim_lsp.intelephense.setup {
 nvim_lsp.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  flags = lsp_flags,
 }
 
 nvim_lsp.volar.setup {
