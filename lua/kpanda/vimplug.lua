@@ -31,7 +31,9 @@ Plug('glepnir/lspsaga.nvim', { branch = 'main' })
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'airblade/vim-gitgutter'
+Plug 'WhoIsSethDaniel/lualine-lsp-progress.nvim'
+--Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 --Plug('akinsho/toggleterm.nvim', { tag = 'v1.*'})

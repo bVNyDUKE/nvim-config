@@ -83,6 +83,13 @@ null_ls.setup({
     null_ls.builtins.formatting.phpcsfixer,
   },
   diagnostics_format = "[#{s}] #{m}",
+  diagnostic_config = {
+    underline = true,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = false,
+    severity_sort = true,
+  },
   on_attach = on_attach,
 })
 
@@ -135,15 +142,12 @@ nvim_lsp.sumneko_lua.setup {
   }
 }
 
-vim.diagnostic.config {
-  virtual_text = false,
-  signs = true,
-  underline = true,
-}
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  update_in_insert = false,
-}
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+  }
 )
