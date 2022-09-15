@@ -64,6 +64,16 @@ local on_attach = function(client, bufnr)
   }
 end
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+  }
+)
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
   protocol.make_client_capabilities()
 )
@@ -79,8 +89,19 @@ local lsp_flags = {
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.diagnostics.eslint_d.with({
+      prefer_local = "node_modules/.bin",
+      diagnostic_config = {
+        virtual_text = false,
+        underline = true,
+        signs = true,
+        update_in_insert = false,
+        severity_sort = true,
+      },
+    }),
+    null_ls.builtins.formatting.eslint_d.with({
+      prefer_local = "node_modules/.bin",
+    }),
     null_ls.builtins.diagnostics.phpstan.with({
       prefer_local = "vendor/bin",
       method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -90,6 +111,13 @@ null_ls.setup({
     null_ls.builtins.formatting.phpcsfixer,
   },
   diagnostics_format = "[#{s}] #{m}",
+  diagnostic_config = {
+    virtual_text = false,
+    underline = true,
+    signs = true,
+    update_in_insert = false,
+    severity_sort = true,
+  },
   on_attach = on_attach,
 })
 
@@ -114,12 +142,6 @@ nvim_lsp.intelephense.setup {
 nvim_lsp.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-}
-
-nvim_lsp.eslint_d.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
 }
 
 nvim_lsp.volar.setup {
@@ -147,13 +169,3 @@ nvim_lsp.sumneko_lua.setup {
     }
   }
 }
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    virtual_text = false,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-  }
-)
