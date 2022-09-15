@@ -3,6 +3,17 @@ if (not status) then return end
 
 local protocol = require('vim.lsp.protocol')
 
+require('mason').setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
+    }
+  }
+})
+require('mason-lspconfig').setup()
+
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -68,12 +79,8 @@ local lsp_flags = {
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.eslint_d.with({
-      prefer_local = "node_modules/.bin",
-    }),
-    null_ls.builtins.formatting.eslint_d.with({
-      prefer_local = "node_modules/.bin",
-    }),
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.diagnostics.phpstan.with({
       prefer_local = "vendor/bin",
       method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -83,13 +90,6 @@ null_ls.setup({
     null_ls.builtins.formatting.phpcsfixer,
   },
   diagnostics_format = "[#{s}] #{m}",
-  diagnostic_config = {
-    underline = true,
-    virtual_text = false,
-    signs = true,
-    update_in_insert = false,
-    severity_sort = true,
-  },
   on_attach = on_attach,
 })
 
@@ -114,6 +114,12 @@ nvim_lsp.intelephense.setup {
 nvim_lsp.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+}
+
+nvim_lsp.eslint_d.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
 }
 
 nvim_lsp.volar.setup {

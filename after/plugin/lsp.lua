@@ -1,15 +1,5 @@
 require('nvim-autopairs').setup {}
 require('luasnip').setup {}
-require('mason').setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
-    }
-  }
-})
-require('mason-lspconfig').setup()
 require('lsp-format').setup {}
 
 local cmp = require 'cmp'
