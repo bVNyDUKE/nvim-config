@@ -109,6 +109,7 @@ null_ls.setup({
       timeout = 20000,
     }),
     null_ls.builtins.formatting.phpcsfixer,
+    null_ls.builtins.formatting.prettier,
   },
   diagnostics_format = "[#{s}] #{m}",
   diagnostic_config = {
