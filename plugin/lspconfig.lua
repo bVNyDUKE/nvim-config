@@ -107,6 +107,13 @@ null_ls.setup({
       method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       to_temp_file = false,
       timeout = 20000,
+      diagnostic_config = {
+        virtual_text = false,
+        underline = true,
+        signs = true,
+        update_in_insert = false,
+        severity_sort = true,
+      },
     }),
     null_ls.builtins.formatting.phpcsfixer,
     null_ls.builtins.formatting.prettier,
@@ -141,6 +148,16 @@ nvim_lsp.intelephense.setup {
 }
 
 nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+nvim_lsp.cssls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+nvim_lsp.dockerls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
