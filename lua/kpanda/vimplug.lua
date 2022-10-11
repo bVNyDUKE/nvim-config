@@ -2,16 +2,17 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '/home/kpanda/.config/nvim/plugged')
 --Themes
---Plug 'dracula/vim'
---Plug('sonph/onehalf', {rtp = 'vim/'})
-Plug 'EdenEast/nightfox.nvim'
 Plug('folke/tokyonight.nvim', { branch = 'main' })
+
+Plug 'lewis6991/impatient.nvim'
+
+Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'mrshmllow/document-color'
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
   vim.cmd(':TSUpdate')
 end
 })
-Plug 'nvim-treesitter/nvim-treesitter-context'
+-- Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 
 --LSP
