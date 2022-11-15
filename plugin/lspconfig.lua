@@ -90,7 +90,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
     null_ls.builtins.diagnostics.eslint_d.with({
-      prefer_local = "node_modules/.bin",
+      only_local = "node_modules/.bin",
       diagnostic_config = {
         virtual_text = false,
         underline = true,
@@ -98,9 +98,15 @@ null_ls.setup({
         update_in_insert = false,
         severity_sort = true,
       },
+      filter = function(diagnostic)
+        return diagnostic.code ~= "prettier/prettier"
+      end,
     }),
     null_ls.builtins.formatting.eslint_d.with({
-      prefer_local = "node_modules/.bin",
+      only_local = "node_modules/.bin",
+      filter = function(diagnostic)
+        return diagnostic.code ~= "prettier/prettier"
+      end,
     }),
     null_ls.builtins.diagnostics.phpstan.with({
       prefer_local = "vendor/bin",
@@ -112,11 +118,13 @@ null_ls.setup({
         underline = true,
         signs = true,
         update_in_insert = false,
-        severity_sort = true,
+        severity_sort = false,
       },
     }),
     null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.prettier.with({
+      only_local = "node_modules/.bin"
+    }),
   },
   diagnostics_format = "[#{s}] #{m}",
   diagnostic_config = {
@@ -172,6 +180,13 @@ nvim_lsp.volar.setup {
       }
     }
   }
+}
+
+nvim_lsp.Prisma.setup {
+  on_attach = on_attach,
+  filetypes = { "prisma" },
+  capabilities = capabilities,
+  flags = lsp_flags,
 }
 
 nvim_lsp.sumneko_lua.setup {

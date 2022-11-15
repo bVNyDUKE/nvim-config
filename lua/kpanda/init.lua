@@ -3,4 +3,8 @@ require('kpanda.vimplug')
 require('impatient')
 require('kpanda.telescope')
 
-vim.cmd("colorscheme tokyonight-moon")
+require('onedark').setup {
+  style = 'warm'
+}
+
+vim.cmd("colorscheme tokyonight")

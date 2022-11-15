@@ -2,7 +2,9 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '/home/kpanda/.config/nvim/plugged')
 --Themes
+Plug 'navarasu/onedark.nvim'
 Plug('folke/tokyonight.nvim', { branch = 'main' })
+Plug 'kvrohit/mellow.nvim'
 
 Plug 'lewis6991/impatient.nvim'
 
