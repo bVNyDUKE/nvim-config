@@ -7,4 +7,4 @@ require('onedark').setup {
   style = 'warm'
 }
 
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme tokyonight")

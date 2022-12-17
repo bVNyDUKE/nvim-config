@@ -35,13 +35,14 @@ null_ls.setup({
       require "document-color".buf_attach(bufnr)
     end
   end,
+
+  -- Vue setup:
+  -- prettierd - only local
+  --
+  -- NextJs setup:
+  -- prettierd - default
   sources = {
-    null_ls.builtins.formatting.eslint_d.with({
-      only_local = "node_modules/.bin",
-      filter = function(diagnostic)
-        return diagnostic.code ~= "prettier/prettier"
-      end,
-    }),
+    null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.diagnostics.phpstan.with({
       prefer_local = "vendor/bin",
       method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -56,7 +57,7 @@ null_ls.setup({
       },
     }),
     null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.formatting.prettier.with({
+    null_ls.builtins.formatting.prettierd.with({
       only_local = "node_modules/.bin"
     }),
   }
