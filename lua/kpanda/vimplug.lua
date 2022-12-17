@@ -14,22 +14,31 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
   vim.cmd(':TSUpdate')
 end
 })
+
 -- Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 
---LSP
+-- LSP Support
+Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'lukas-reineke/lsp-format.nvim'
-Plug 'hrsh7th/cmp-buffer'
+
+-- Autocompletion
 Plug 'hrsh7th/nvim-cmp'
-Plug 'onsails/lspkind-nvim'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+
+--  Snippets
 Plug 'L3MON4D3/LuaSnip'
-Plug 'neovim/nvim-lspconfig'
+Plug 'rafamadriz/friendly-snippets'
+
+Plug 'VonHeikemen/lsp-zero.nvim'
+
+
+Plug 'lukas-reineke/lsp-format.nvim'
 Plug('glepnir/lspsaga.nvim', { branch = 'main' })
 
 Plug 'nvim-lua/plenary.nvim'
