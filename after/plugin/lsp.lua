@@ -38,7 +38,6 @@ null_ls.setup({
 
   -- Vue setup:
   -- prettierd - only local
-  --
   -- NextJs setup:
   -- prettierd - default
   sources = {
@@ -58,7 +57,7 @@ null_ls.setup({
     }),
     null_ls.builtins.formatting.phpcsfixer,
     null_ls.builtins.formatting.prettierd.with({
-      only_local = "node_modules/.bin"
+      disabled_filetypes = {"vue"},
     }),
   }
 })
