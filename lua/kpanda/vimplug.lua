@@ -23,6 +23,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 
+-- Formatting
+Plug 'lukas-reineke/lsp-format.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+
 -- Autocompletion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -37,8 +41,6 @@ Plug 'rafamadriz/friendly-snippets'
 
 Plug 'VonHeikemen/lsp-zero.nvim'
 
-
-Plug 'lukas-reineke/lsp-format.nvim'
 Plug('glepnir/lspsaga.nvim', { branch = 'main' })
 
 Plug 'nvim-lua/plenary.nvim'
