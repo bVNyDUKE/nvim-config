@@ -1,4 +1,5 @@
 local lsp = require('lsp-zero')
+local autopairs = require("nvim-autopairs")
 
 lsp.preset('recommended')
 
@@ -8,7 +9,19 @@ lsp.ensure_installed({
   'sumneko_lua',
 })
 
+lsp.set_preferences({
+  suggest_lsp_servers = false,
+  sign_icons = {
+    error = 'E',
+    warn = 'W',
+    hint = 'H',
+    info = 'I',
+  }
+})
+
 lsp.setup()
+
+autopairs.setup {}
 
 local null_ls = require("null-ls")
 local null_opts = lsp.build_options('null-ls', {})

@@ -5,10 +5,11 @@ vim.call('plug#begin', '/home/kpanda/.config/nvim/plugged')
 Plug 'navarasu/onedark.nvim'
 Plug('folke/tokyonight.nvim', { branch = 'main' })
 Plug 'kvrohit/mellow.nvim'
+Plug('catppuccin/nvim', { as = 'catppuccin' })
+Plug 'rose-pine/neovim'
 
 Plug 'lewis6991/impatient.nvim'
 
-Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'mrshmllow/document-color'
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
   vim.cmd(':TSUpdate')
