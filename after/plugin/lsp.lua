@@ -1,5 +1,6 @@
 local lsp = require('lsp-zero')
 local autopairs = require("nvim-autopairs")
+local nvim_lsp = require("lspconfig")
 
 lsp.preset('recommended')
 
@@ -17,6 +18,14 @@ lsp.set_preferences({
     hint = 'H',
     info = 'I',
   }
+})
+
+lsp.configure('tsserver', {
+  root_dir = nvim_lsp.util.root_pattern("package.json")
+})
+
+lsp.configure('denols', {
+  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
 })
 
 lsp.setup()
@@ -42,6 +51,7 @@ null_ls.setup({
   -- prettierd - default
   sources = {
     null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.black,
     null_ls.builtins.diagnostics.phpstan.with({
       prefer_local = "vendor/bin",
       method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
