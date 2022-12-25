@@ -1,13 +1,9 @@
-local Remap = require("kpanda.keymap")
-local nnoremap = Remap.nnoremap
-local inoremap = Remap.inoremap
-
-inoremap('jj', '<Esc>')
-nnoremap('<leader>w', '<Cmd>update<CR>')
-nnoremap('<c-x>', ':Ex<CR>')
-nnoremap('<C-w>tn', ':tabnew<CR>')
-nnoremap('<C-w>1', '1gt')
-nnoremap('<C-w>2', '2gt')
-nnoremap('<C-w>3', '3gt')
-nnoremap('<C-w>4', '4gt')
-nnoremap('<C-w>5', '5gt')
+vim.keymap.set('i','jj', '<Esc>')
+vim.keymap.set('n', '<leader>w', '<Cmd>update<CR>')
+vim.keymap.set('n', '<c-x>', ':Ex<CR>')
+vim.keymap.set('n', '<C-w>tn', ':tabnew<CR>')
+vim.keymap.set('n', '<C-w>1', '1gt')
+vim.keymap.set('n', '<C-w>2', '2gt')
+vim.keymap.set('n', '<C-w>3', '3gt')
+vim.keymap.set('n', '<C-w>4', '4gt')
+vim.keymap.set('n', '<C-w>5', '5gt')

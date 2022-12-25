@@ -20,6 +20,16 @@ lsp.set_preferences({
   }
 })
 
+lsp.configure('sumneko_lua', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {'vim'}
+      }
+    }
+  }
+})
+
 lsp.configure('tsserver', {
   root_dir = nvim_lsp.util.root_pattern("package.json")
 })
@@ -50,7 +60,9 @@ null_ls.setup({
   -- NextJs setup:
   -- prettierd - default
   sources = {
-    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.eslint_d.with({
+      extra_filetypes = {"astro"}
+    }),
     null_ls.builtins.formatting.black,
     null_ls.builtins.diagnostics.phpstan.with({
       prefer_local = "vendor/bin",
@@ -68,6 +80,7 @@ null_ls.setup({
     null_ls.builtins.formatting.phpcsfixer,
     null_ls.builtins.formatting.prettierd.with({
       disabled_filetypes = {"vue"},
+      extra_filetypes = {"astro"}
     }),
   }
 })

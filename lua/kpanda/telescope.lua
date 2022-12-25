@@ -1,6 +1,6 @@
-function telescope_buffer_dir()
-  return vim.fn.expand('%:p:h')
-end
+-- function telescope_buffer_dir()
+--   return vim.fn.expand('%:p:h')
+-- end
 
 local actions = require('telescope.actions')
 
@@ -18,8 +18,7 @@ require("telescope").setup{
   }
 }
 
-local nnoremap = require("kpanda.keymap").nnoremap
-nnoremap('<c-p>', '<cmd>Telescope find_files<cr>')
-nnoremap('<leader>fg', '<cmd>Telescope live_grep<cr>')
-nnoremap('<leader>fb', '<cmd>Telescope buffers<cr>')
-nnoremap('<leader>fh', '<cmd>Telescope help_tags<cr>')
+vim.keymap.set('n','<c-p>', '<cmd>Telescope find_files<cr>')
+vim.keymap.set('n','<leader>fg', '<cmd>Telescope live_grep<cr>')
+vim.keymap.set('n','<leader>fb', '<cmd>Telescope buffers<cr>')
+vim.keymap.set('n','<leader>fh', '<cmd>Telescope help_tags<cr>')
