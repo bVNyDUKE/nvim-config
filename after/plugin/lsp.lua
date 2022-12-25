@@ -20,6 +20,12 @@ lsp.set_preferences({
   }
 })
 
+lsp.configure('intelephense', {
+  init_options = {
+    globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+  }
+})
+
 lsp.configure('sumneko_lua', {
   settings = {
     Lua = {
