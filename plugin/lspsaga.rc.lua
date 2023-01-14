@@ -2,16 +2,21 @@ require('lspsaga').setup({
   server_filetype_map = {
     typescript = 'typescript'
   },
-  code_action_lightbulb = {
-    enable = false
+  lightbulb = {
+    enable = true,
+    sign = true,
+    virtual_text = false,
   },
   symbol_in_winbar = {
     enable = true
+  },
+  ui = {
+    border = 'double',
   }
 })
 
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', ']g', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
-vim.keymap.set('n', '[g', '<Cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
-vim.keymap.set('n', 'gh', '<Cmd>Lspsaga hover_doc<CR>', opts)
-vim.keymap.set('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>', opts)
+vim.keymap.set('n', ']g', '<Cmd>Lspsaga diagnostic_jump_next<CR>')
+vim.keymap.set('n', '[g', '<Cmd>Lspsaga diagnostic_jump_prev<CR>')
+vim.keymap.set({'n', 'v'}, '<leader>ca', '<cmd>Lspsaga code_action<CR>')
+vim.keymap.set('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>')
+vim.keymap.set({'n', 't'}, '<C-t>', '<Cmd>Lspsaga term_toggle<CR>')

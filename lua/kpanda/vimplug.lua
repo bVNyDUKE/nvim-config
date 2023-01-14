@@ -55,7 +55,6 @@ Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'numToStr/FTerm.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'tpope/vim-fugitive'
