@@ -43,8 +43,6 @@ Plug 'rafamadriz/friendly-snippets'
 
 Plug 'VonHeikemen/lsp-zero.nvim'
 
-Plug('glepnir/lspsaga.nvim', { branch = 'main' })
-
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lualine/lualine.nvim'

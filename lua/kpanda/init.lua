@@ -4,7 +4,7 @@ require('impatient')
 require('kpanda.telescope')
 
 require('onedark').setup {
-  style = 'warm'
+  style = 'dark'
 }
 
 vim.cmd("colorscheme tokyonight-storm")

@@ -44,6 +44,15 @@ lsp.configure('denols', {
   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
 })
 
+lsp.on_attach(function(_, bufnr)
+  local opts = {buffer = bufnr, remap = false}
+  local bind = vim.keymap.set
+  bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  bind('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+end)
+
 lsp.setup()
 
 autopairs.setup {}
