@@ -1,5 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
+  ensure_installed = {"lua", "javascript", "typescript", "vue", "css", "html", "php", "prisma"},
   sync_install = false,
   highlight = {
     enable = true,

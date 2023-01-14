@@ -7,6 +7,7 @@ Plug('folke/tokyonight.nvim', { branch = 'main' })
 Plug 'kvrohit/mellow.nvim'
 Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'rose-pine/neovim'
+Plug 'rebelot/kanagawa.nvim'
 
 Plug 'lewis6991/impatient.nvim'
 
