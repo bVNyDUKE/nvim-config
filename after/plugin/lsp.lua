@@ -6,7 +6,6 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({
   'tsserver',
-  'eslint',
   'sumneko_lua',
 })
 
@@ -17,12 +16,6 @@ lsp.set_preferences({
     warn = 'W',
     hint = 'H',
     info = 'I',
-  }
-})
-
-lsp.configure('intelephense', {
-  init_options = {
-    globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
   }
 })
 
@@ -38,10 +31,6 @@ lsp.configure('sumneko_lua', {
 
 lsp.configure('tsserver', {
   root_dir = nvim_lsp.util.root_pattern("package.json")
-})
-
-lsp.configure('denols', {
-  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
 })
 
 lsp.setup()
@@ -66,27 +55,10 @@ null_ls.setup({
   -- NextJs setup:
   -- prettierd - default
   sources = {
-    null_ls.builtins.formatting.eslint_d.with({
-      extra_filetypes = {"astro"}
-    }),
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.diagnostics.phpstan.with({
-      prefer_local = "vendor/bin",
-      method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-      to_temp_file = false,
-      timeout = 20000,
-      diagnostic_config = {
-        virtual_text = false,
-        underline = true,
-        signs = true,
-        update_in_insert = false,
-        severity_sort = false,
-      },
-    }),
-    null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.formatting.prettierd.with({
-      disabled_filetypes = {"vue"},
-      extra_filetypes = {"astro"}
-    }),
+    null_ls.builtins.formatting.eslint_d,
+    -- null_ls.builtins.formatting.prettierd.with({
+    --   disabled_filetypes = {"vue"},
+    --   extra_filetypes = {"astro"}
+    -- }),
   }
 })
