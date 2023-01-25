@@ -6,7 +6,6 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({
   'tsserver',
-  'eslint',
   'sumneko_lua',
 })
 
@@ -75,6 +74,9 @@ null_ls.setup({
   -- NextJs setup:
   -- prettierd - default
   sources = {
+    null_ls.builtins.diagnostics.eslint_d.with({
+      extra_filetypes = {"astro"}
+    }),
     null_ls.builtins.formatting.eslint_d.with({
       extra_filetypes = {"astro"}
     }),

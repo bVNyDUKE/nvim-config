@@ -42,7 +42,7 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 
-Plug 'VonHeikemen/lsp-zero.nvim'
+Plug('VonHeikemen/lsp-zero.nvim', {branch = 'v1.x'})
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
