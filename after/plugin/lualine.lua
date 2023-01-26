@@ -12,7 +12,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = { 'filename' },
-    lualine_x = { 'encoding', 'filetype' },
+    lualine_x = { 'lsp_progress','encoding', 'filetype' },
     lualine_y = {},
     lualine_z = {}
   },
