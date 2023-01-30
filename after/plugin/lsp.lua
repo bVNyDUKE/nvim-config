@@ -55,6 +55,7 @@ null_ls.setup({
   -- NextJs setup:
   -- prettierd - default
   sources = {
+    null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.formatting.eslint_d,
     -- null_ls.builtins.formatting.prettierd.with({
     --   disabled_filetypes = {"vue"},
