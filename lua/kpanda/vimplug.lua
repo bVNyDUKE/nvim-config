@@ -18,13 +18,14 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
 end
 })
 
--- Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 
 -- LSP Support
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+Plug('glepnir/lspsaga.nvim', { branch = 'main' })
 
 -- Formatting
 Plug 'lukas-reineke/lsp-format.nvim'
@@ -49,7 +50,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'WhoIsSethDaniel/lualine-lsp-progress.nvim'
 
---Plug 'airblade/vim-gitgutter'
 Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons'
