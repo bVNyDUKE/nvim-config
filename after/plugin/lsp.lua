@@ -17,11 +17,7 @@ lsp.set_preferences({
     hint = 'H',
     info = 'I',
   },
-  set_lsp_keymaps = {
-    omit = {
-      'K'
-    }
-  }
+  set_lsp_keymaps = false
 })
 
 lsp.configure('intelephense', {
