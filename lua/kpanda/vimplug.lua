@@ -19,7 +19,7 @@ end
 })
 
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'windwp/nvim-autopairs'
+-- Plug 'windwp/nvim-autopairs'
 
 -- LSP Support
 Plug 'neovim/nvim-lspconfig'
@@ -33,6 +33,7 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 
 -- Autocompletion
 Plug 'hrsh7th/nvim-cmp'
+Plug 'echasnovski/mini.pairs'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'saadparwaiz1/cmp_luasnip'

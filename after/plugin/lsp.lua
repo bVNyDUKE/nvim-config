@@ -1,6 +1,7 @@
 local lsp = require('lsp-zero')
-local autopairs = require("nvim-autopairs")
 local nvim_lsp = require("lspconfig")
+
+require('mini.pairs').setup()
 
 lsp.preset('recommended')
 
@@ -50,12 +51,11 @@ lsp.configure('denols', {
 --   bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 --   bind('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 --   bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+--   bind('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 --   bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 -- end)
 
 lsp.setup()
-
-autopairs.setup {}
 
 local null_ls = require("null-ls")
 local null_opts = lsp.build_options('null-ls', {})
