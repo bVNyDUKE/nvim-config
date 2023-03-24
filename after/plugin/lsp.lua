@@ -6,7 +6,6 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({
   'tsserver',
-  'sumneko_lua',
 })
 
 lsp.set_preferences({
@@ -19,7 +18,7 @@ lsp.set_preferences({
   }
 })
 
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
@@ -67,9 +66,10 @@ null_ls.setup({
   sources = {
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.formatting.eslint_d,
-    -- null_ls.builtins.formatting.prettierd.with({
-    --   disabled_filetypes = {"vue"},
-    --   extra_filetypes = {"astro"}
-    -- }),
+    null_ls.builtins.formatting.prettier.with({
+      only_local = "node_modules/.bin",
+      disabled_filetypes = {"vue"},
+      extra_filetypes = {"astro"}
+    }),
   }
 })
