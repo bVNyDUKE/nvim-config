@@ -10,7 +10,6 @@ Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'rose-pine/neovim'
 Plug 'rebelot/kanagawa.nvim'
 
-Plug 'lewis6991/impatient.nvim'
 
 Plug 'mrshmllow/document-color'
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
@@ -19,7 +18,7 @@ end
 })
 
 Plug 'nvim-treesitter/nvim-treesitter-context'
--- Plug 'windwp/nvim-autopairs'
+Plug 'echasnovski/mini.pairs'
 
 -- LSP Support
 Plug 'neovim/nvim-lspconfig'
@@ -33,7 +32,6 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 
 -- Autocompletion
 Plug 'hrsh7th/nvim-cmp'
-Plug 'echasnovski/mini.pairs'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'saadparwaiz1/cmp_luasnip'
@@ -52,6 +50,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'WhoIsSethDaniel/lualine-lsp-progress.nvim'
 
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/impatient.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
