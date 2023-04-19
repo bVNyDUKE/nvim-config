@@ -13,7 +13,7 @@ set.softtabstop    = 2 -- see multiple spaces as tabstops so <BS> does the right
 set.shiftwidth     = 2 -- width for autoindents
 set.expandtab      = true -- converts tabs to white space
 
-set.smartindent = true
+set.smartindent    = true
 
 set.errorbells     = false
 set.wrap           = false

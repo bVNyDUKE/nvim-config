@@ -5,10 +5,11 @@ vim.call('plug#begin', '/home/kpanda/.config/nvim/plugged')
 Plug 'AlexvZyl/nordic.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug('folke/tokyonight.nvim', { branch = 'main' })
-Plug 'kvrohit/mellow.nvim'
 Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'rose-pine/neovim'
 Plug 'rebelot/kanagawa.nvim'
+Plug "ellisonleao/gruvbox.nvim"
+-- Plug 'sainnhe/gruvbox-material'
 
 
 Plug 'mrshmllow/document-color'

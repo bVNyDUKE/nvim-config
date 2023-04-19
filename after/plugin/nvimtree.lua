@@ -1,5 +1,8 @@
 require("nvim-tree").setup({
   hijack_netrw = false,
+  renderer = {
+    root_folder_label = false
+  },
   git = {
     enable = true
   },
@@ -7,7 +10,6 @@ require("nvim-tree").setup({
     side = "right",
     number = true,
     relativenumber = true,
-    hide_root_folder = true,
     width = {
       min = 50,
       max = 150
