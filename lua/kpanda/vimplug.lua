@@ -24,7 +24,6 @@ Plug 'echasnovski/mini.pairs'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug('glepnir/lspsaga.nvim', { branch = 'main' })
 
 -- Formatting
 Plug 'lukas-reineke/lsp-format.nvim'
