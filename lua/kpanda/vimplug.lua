@@ -25,6 +25,12 @@ Plug 'echasnovski/mini.pairs'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+--
+-- Golang
+Plug('fatih/vim-go', { ['do'] = function()
+  vim.cmd(':GoUpdateBinaries')
+end
+})
 
 -- Formatting
 Plug 'lukas-reineke/lsp-format.nvim'
