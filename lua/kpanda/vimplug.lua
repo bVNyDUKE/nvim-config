@@ -8,6 +8,10 @@ Plug 'kvrohit/mellow.nvim'
 Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'rose-pine/neovim'
 Plug 'rebelot/kanagawa.nvim'
+Plug('bluz71/vim-nightfly-colors', { as = 'nightfly' })
+Plug 'loctvl842/monokai-pro.nvim'
+Plug 'sainnhe/sonokai'
+Plug 'ellisonleao/gruvbox.nvim'
 
 Plug 'lewis6991/impatient.nvim'
 

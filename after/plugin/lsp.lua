@@ -28,19 +28,24 @@ lsp.configure('lua_ls', {
   }
 })
 
+nvim_lsp.eslint.setup({
+  working_directories = {"./frontend"}
+})
+
 lsp.configure('tsserver', {
   root_dir = nvim_lsp.util.root_pattern("package.json")
 })
 
 -- Config for no LspSaga
--- lsp.on_attach(function(_, bufnr)
---   local opts = {buffer = bufnr, remap = false}
---   local bind = vim.keymap.set
---   bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
---   bind('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
---   bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
---   bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
--- end)
+lsp.on_attach(function(_, bufnr)
+  local opts = {buffer = bufnr, remap = false}
+  local bind = vim.keymap.set
+  bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  bind('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  bind('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+end)
 
 lsp.setup()
 
@@ -64,8 +69,8 @@ null_ls.setup({
   -- NextJs setup:
   -- prettierd - default
   sources = {
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.formatting.eslint_d,
+    -- null_ls.builtins.diagnostics.eslint,
+    -- null_ls.builtins.formatting.eslint,
     null_ls.builtins.formatting.prettier.with({
       only_local = "node_modules/.bin",
       disabled_filetypes = {"vue"},
