@@ -28,7 +28,7 @@ lsp.configure('lua_ls', {
   }
 })
 
-nvim_lsp.eslint.setup({
+lsp.configure('eslint',{
   working_directories = {"./frontend"}
 })
 
