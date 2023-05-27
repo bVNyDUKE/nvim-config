@@ -50,6 +50,7 @@ lsp.configure('denols', {
 
 -- No LspSaga config
 lsp.on_attach(function(_, bufnr)
+  lsp.default_keymaps({bufnr = bufnr})
   local opts = {buffer = bufnr, remap = false}
   local bind = vim.keymap.set
   bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
