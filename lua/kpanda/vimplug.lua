@@ -8,8 +8,9 @@ Plug('folke/tokyonight.nvim', { branch = 'main' })
 Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'rose-pine/neovim'
 Plug 'rebelot/kanagawa.nvim'
-Plug "ellisonleao/gruvbox.nvim"
--- Plug 'sainnhe/gruvbox-material'
+Plug 'ellisonleao/gruvbox.nvim'
+Plug 'projekt0n/github-nvim-theme'
+Plug 'loctvl842/monokai-pro.nvim'
 
 
 Plug 'mrshmllow/document-color'
@@ -25,12 +26,6 @@ Plug 'echasnovski/mini.pairs'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
---
--- Golang
-Plug('fatih/vim-go', { ['do'] = function()
-  vim.cmd(':GoUpdateBinaries')
-end
-})
 
 -- Formatting
 Plug 'lukas-reineke/lsp-format.nvim'

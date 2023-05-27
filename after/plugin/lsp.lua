@@ -9,6 +9,10 @@ lsp.ensure_installed({
   'tsserver',
 })
 
+lsp.configure('tailwindcss', {
+  root_dir = nvim_lsp.util.root_pattern("tailwind.config.js")
+})
+
 lsp.set_preferences({
   suggest_lsp_servers = false,
   sign_icons = {
@@ -75,13 +79,20 @@ null_ls.setup({
   -- NextJs setup:
   -- prettierd - default
   sources = {
-    null_ls.builtins.diagnostics.eslint_d.with({
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.goimports_reviser,
+    null_ls.builtins.diagnostics.eslint.with({
       extra_filetypes = {"astro"}
     }),
-    null_ls.builtins.formatting.eslint_d.with({
+    null_ls.builtins.formatting.eslint.with({
       extra_filetypes = {"astro"}
     }),
-    null_ls.builtins.formatting.black,
+    null_ls.builtins.code_actions.eslint.with({
+      extra_filetypes = {"astro"}
+    }),
+    null_ls.builtins.formatting.black.with({
+      only_local = "env/bin"
+    }),
     null_ls.builtins.diagnostics.phpstan.with({
       prefer_local = "vendor/bin",
       method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -102,6 +113,10 @@ null_ls.setup({
     }),
   }
 })
+
+vim.cmd([[
+  command! -range=% Pfmt <line1>,<line2>!prettier --stdin-filepath %
+]])
 
 -- Turn off semantic highlighting
 -- vim.api.nvim_create_autocmd('LspAttach', {

@@ -2,6 +2,10 @@ require('kpanda.set')
 require('kpanda.vimplug')
 require('impatient')
 require('kpanda.telescope')
+
+--vim.cmd("colorscheme monokai-pro")
+--vim.cmd("colorscheme github_dark_dimmed")
+
 require("gruvbox").setup({
   contrast = "hard",
   inverse = true,
@@ -15,11 +19,4 @@ require("gruvbox").setup({
 
 vim.o.background = "dark"
 vim.cmd("colorscheme gruvbox")
-
--- vim.cmd("colorscheme gruvbox-material")
--- vim.g.gruvbox_material_background = "hard"
--- vim.g.gruvbox_material_better_performance = 1
--- vim.cmd("colorscheme catppuccin-mocha")
--- vim.cmd[[hi LineNr guifg=grey]]
-
 
