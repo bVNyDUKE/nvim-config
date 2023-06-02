@@ -60,5 +60,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sleuth'
 
 vim.call('plug#end')

@@ -58,6 +58,7 @@ lsp.on_attach(function(_, bufnr)
   bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   bind('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  bind('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
 end)
 
 lsp.setup()
