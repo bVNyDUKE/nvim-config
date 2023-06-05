@@ -7,10 +7,13 @@ require("nvim-tree").setup({
     side = "right",
     number = true,
     relativenumber = true,
-    hide_root_folder = true,
+    width = 50
   },
   diagnostics = {
     enable = true
+  },
+  renderer = {
+    root_folder_label = false
   }
 })
 

@@ -12,6 +12,7 @@ Plug('bluz71/vim-nightfly-colors', { as = 'nightfly' })
 Plug 'loctvl842/monokai-pro.nvim'
 Plug 'sainnhe/sonokai'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'projekt0n/github-nvim-theme'
 
 Plug 'lewis6991/impatient.nvim'
 
@@ -64,5 +65,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sleuth'
 
 vim.call('plug#end')

@@ -6,6 +6,7 @@ local actions = require('telescope.actions')
 
 require("telescope").setup{
   defaults = {
+      layout_strategy = "vertical",
       file_ignore_patterns = {
           "node_modules",
           "vendor",
