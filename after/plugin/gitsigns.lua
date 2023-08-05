@@ -1,3 +1,5 @@
+vim.cmd([[ command! -nargs=0 Ggp terminal git push origin ${git_current_branch} ]])
+
 require('gitsigns').setup {
   sign_priority = 3,
   on_attach = function(bufnr)

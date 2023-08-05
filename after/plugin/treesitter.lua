@@ -7,6 +7,7 @@ require'nvim-treesitter.configs'.setup {
     "python",
     "markdown",
     "rust",
+    "go",
     "vim",
     "yaml",
     "toml",

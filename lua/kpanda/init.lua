@@ -10,7 +10,7 @@ require("gruvbox").setup({
   contrast = "hard",
   inverse = true,
   overrides = {
-    LineNr = { fg = "grey" }
+    LineNr = { fg = "grey" },
   },
   palette_overrides={
     bright_red = "#de5050"

@@ -82,7 +82,7 @@ null_ls.setup({
   -- prettierd - default
   sources = {
     null_ls.builtins.formatting.gofumpt,
-    null_ls.builtins.formatting.goimports_reviser,
+    --null_ls.builtins.diagnostics.golangci_lint,
     null_ls.builtins.diagnostics.mypy.with({
       extra_args = {"--python-executable", "./env/bin/python"}
     }),
