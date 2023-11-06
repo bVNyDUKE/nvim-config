@@ -4,6 +4,7 @@ set.compatible     = false -- disable compatibility to old-time vi
 set.showmatch      = true --show matching
 set.ignorecase     = true --case insensitive
 set.smartcase      = true
+set.cursorline     = true
 
 set.hlsearch       = false -- highlight search
 set.incsearch      = true -- incremental search

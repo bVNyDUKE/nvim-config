@@ -73,6 +73,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.code_actions.eslint,
     null_ls.builtins.formatting.eslint,
+    null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.prettier.with({
       only_local = "node_modules/.bin",
       disabled_filetypes = {"vue"},

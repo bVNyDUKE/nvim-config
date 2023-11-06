@@ -29,6 +29,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'nvimdev/lspsaga.nvim'
 
 -- Formatting
 Plug 'lukas-reineke/lsp-format.nvim'
@@ -60,7 +61,7 @@ Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'lukas-reineke/indent-blankline.nvim'
+-- Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'

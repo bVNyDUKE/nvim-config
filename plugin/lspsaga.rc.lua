@@ -12,6 +12,9 @@
 --   },
 --   ui = {
 --     border = 'rounded',
+--   },
+--   finder = {
+--     default = "ref"
 --   }
 -- })
 
@@ -19,4 +22,6 @@
 -- vim.keymap.set('n', '[g', '<Cmd>Lspsaga diagnostic_jump_prev<CR>')
 -- vim.keymap.set({'n', 'v'}, '<leader>ca', '<cmd>Lspsaga code_action<CR>')
 -- vim.keymap.set('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>')
--- vim.keymap.set({'n', 't'}, '<C-t>', '<Cmd>Lspsaga term_toggle<CR>')
+-- vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>')
+-- vim.keymap.set('n', 'gr', '<Cmd>Lspsaga lsp_finder<CR>')
+-- vim.keymap.set('n', 'gR', '<Cmd>Lspsaga rename<CR>')
