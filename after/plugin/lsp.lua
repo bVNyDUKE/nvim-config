@@ -48,6 +48,14 @@ lsp.configure('denols', {
   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
 })
 
+lsp.configure('svelte', {
+  settings = {
+    Svelte = {
+      ['enable-ts-plugin'] = false
+    }
+  }
+})
+
 -- No LspSaga config
 lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({bufnr = bufnr})
@@ -56,6 +64,7 @@ lsp.on_attach(function(_, bufnr)
   bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   bind('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  bind('n', '<leader>vr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   bind('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   bind('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
@@ -88,13 +97,13 @@ null_ls.setup({
     }),
     null_ls.builtins.diagnostics.ruff,
     null_ls.builtins.diagnostics.eslint.with({
-      extra_filetypes = {"astro"}
+      extra_filetypes = {"astro", "svelte"}
     }),
     null_ls.builtins.formatting.eslint.with({
-      extra_filetypes = {"astro"}
+      extra_filetypes = {"astro", "svelte"}
     }),
     null_ls.builtins.code_actions.eslint.with({
-      extra_filetypes = {"astro"}
+      extra_filetypes = {"astro", "svelte"}
     }),
     null_ls.builtins.formatting.black.with({
       only_local = "env/bin"
@@ -115,7 +124,7 @@ null_ls.setup({
     null_ls.builtins.formatting.phpcsfixer,
     null_ls.builtins.formatting.prettierd.with({
       disabled_filetypes = {"vue"},
-      extra_filetypes = {"astro"}
+      extra_filetypes = {"astro", "svelte"}
     }),
   }
 })

@@ -55,7 +55,7 @@ Plug 'lewis6991/impatient.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'lukas-reineke/indent-blankline.nvim'
+-- Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
