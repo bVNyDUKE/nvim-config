@@ -1,1 +1,1 @@
-require('kpanda')
+require("kpanda")
