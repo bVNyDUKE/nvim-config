@@ -59,15 +59,16 @@ lsp.configure('svelte', {
 -- No LspSaga config
 lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({bufnr = bufnr})
-  local opts = {buffer = bufnr, remap = false}
-  local bind = vim.keymap.set
-  bind('n', ']g', vim.diagnostic.goto_next, opts)
-  bind('n', '[g', vim.diagnostic.goto_prev, opts)
-  bind('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-  bind('n', '<leader>vr', vim.lsp.buf.references, opts)
-  bind('n', 'K', vim.lsp.buf.hover, opts)
-  bind('n', 'gR',vim.lsp.buf.rename, opts)
-  bind('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+  local map = function(keys, func)
+    vim.keymap.set('n', keys, func, {buffer = bufnr, remap = false})
+  end
+  map(']g', vim.diagnostic.goto_next)
+  map('[g', vim.diagnostic.goto_prev)
+  map('<leader>ca', vim.lsp.buf.code_action)
+  map('<leader>vr', vim.lsp.buf.references)
+  map('K', vim.lsp.buf.hover)
+  map('gR',vim.lsp.buf.rename)
+  map('gr', require('telescope.builtin').lsp_references)
 end)
 
 lsp.setup()
