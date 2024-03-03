@@ -71,6 +71,7 @@ lsp.on_attach(function(_, bufnr)
   map('gr', require('telescope.builtin').lsp_references)
   map('gd', require('telescope.builtin').lsp_definitions)
   map('<leader>ds', require('telescope.builtin').lsp_document_symbols)
+  map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
 end)
 
 lsp.setup()
