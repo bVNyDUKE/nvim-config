@@ -27,4 +27,5 @@ vim.keymap.set('n','<leader>fs', builtin.git_status, {desc = '[F]ind Git [S]tatu
 vim.keymap.set('n','<leader>fd', builtin.diagnostics, {desc = '[F]ind [D]iagnostics'})
 vim.keymap.set('n','<leader>fb', builtin.git_branches, {desc = '[F]ind Git [B]ranches'})
 vim.keymap.set('n','<leader>ff', builtin.buffers, {desc = '[F]ind Bu[f]fers'})
+vim.keymap.set('n','<leader>fr', builtin.resume, {desc = '[F]ind [R]esume previous search'})
 vim.keymap.set('n','<leader>fh', builtin.help_tags, {desc = '[F]ind [H]elp'})
