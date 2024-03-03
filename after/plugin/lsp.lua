@@ -1,5 +1,5 @@
 local lsp = require('lsp-zero')
-local nvim_lsp = require("lspconfig")
+local nvim_lsp = require('lspconfig')
 
 require('mini.pairs').setup()
 
@@ -10,7 +10,7 @@ lsp.ensure_installed({
 })
 
 lsp.configure('tailwindcss', {
-  root_dir = nvim_lsp.util.root_pattern("tailwind.config.js")
+  root_dir = nvim_lsp.util.root_pattern("tailwind.config.*")
 })
 
 lsp.set_preferences({
@@ -61,12 +61,12 @@ lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({bufnr = bufnr})
   local opts = {buffer = bufnr, remap = false}
   local bind = vim.keymap.set
-  bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  bind('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  bind('n', '<leader>vr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  bind('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  bind('n', ']g', vim.diagnostic.goto_next, opts)
+  bind('n', '[g', vim.diagnostic.goto_prev, opts)
+  bind('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+  bind('n', '<leader>vr', vim.lsp.buf.references, opts)
+  bind('n', 'K', vim.lsp.buf.hover, opts)
+  bind('n', 'gR',vim.lsp.buf.rename, opts)
   bind('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
 end)
 
@@ -91,18 +91,21 @@ null_ls.setup({
   -- prettierd - default
   sources = {
     null_ls.builtins.formatting.gofumpt,
-    --null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.diagnostics.golangci_lint,
     null_ls.builtins.diagnostics.mypy.with({
       extra_args = {"--python-executable", "./env/bin/python"}
     }),
     null_ls.builtins.diagnostics.ruff,
     null_ls.builtins.diagnostics.eslint.with({
+      prefer_local = "node_modules/.bin",
       extra_filetypes = {"astro", "svelte"}
     }),
     null_ls.builtins.formatting.eslint.with({
+      prefer_local = "node_modules/.bin",
       extra_filetypes = {"astro", "svelte"}
     }),
     null_ls.builtins.code_actions.eslint.with({
+      prefer_local = "node_modules/.bin",
       extra_filetypes = {"astro", "svelte"}
     }),
     null_ls.builtins.formatting.black.with({
@@ -122,15 +125,16 @@ null_ls.setup({
       },
     }),
     null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.formatting.prettierd.with({
+    null_ls.builtins.formatting.prettier.with({
       disabled_filetypes = {"vue"},
       extra_filetypes = {"astro", "svelte"}
     }),
+    null_ls.builtins.formatting.rustfmt,
   }
 })
 
 vim.cmd([[
-  command! -range=% Pfmt <line1>,<line2>!prettier --stdin-filepath %
+  command! -range=% Pfmt <line1>,<line2>!npx prettier --stdin-filepath %
 ]])
 
 -- Turn off semantic highlighting

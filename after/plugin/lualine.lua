@@ -3,8 +3,10 @@ require('lualine').setup {
     icons_enabled = true,
     -- theme = 'gruvbox_dark',
     theme = 'auto',
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    -- component_separators = { left = '', right = '' },
+    -- section_separators = { left = '', right = '' },
+    component_separators = { left = '|', right = '|'},
+    section_separators = {left = "", right = ""},
     disabled_filetypes = {'NvimTree'},
     always_divide_middle = true,
     globalstatus = false,
@@ -12,8 +14,10 @@ require('lualine').setup {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = { 'filename' },
-    -- lualine_x = { 'lsp_progress','encoding', 'filetype' },
+    lualine_c = {{
+      'filename',
+      path = 1,
+    }},
     lualine_x = { 'encoding', 'filetype' },
     lualine_y = {},
     lualine_z = {}
