@@ -69,6 +69,8 @@ lsp.on_attach(function(_, bufnr)
   map('K', vim.lsp.buf.hover)
   map('gR',vim.lsp.buf.rename)
   map('gr', require('telescope.builtin').lsp_references)
+  map('gd', require('telescope.builtin').lsp_definitions)
+  map('<leader>ds', require('telescope.builtin').lsp_document_symbols)
 end)
 
 lsp.setup()
