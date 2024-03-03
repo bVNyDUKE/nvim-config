@@ -19,11 +19,12 @@ require("telescope").setup{
     },
   }
 }
-
-vim.keymap.set('n','<leader>p', '<cmd>Telescope find_files<cr>')
-vim.keymap.set('n','<leader>fg', '<cmd>Telescope live_grep<cr>')
-vim.keymap.set('n','<leader>fs', '<cmd>Telescope git_status<cr>')
-vim.keymap.set('n','<leader>fd', '<cmd>Telescope diagnostics<cr>')
-vim.keymap.set('n','<leader>fb', '<cmd>Telescope git_branches<cr>')
-vim.keymap.set('n','<leader>ff', '<cmd>Telescope buffers<cr>')
-vim.keymap.set('n','<leader>fh', '<cmd>Telescope help_tags<cr>')
+local builtin = require 'telescope.builtin'
+vim.keymap.set('n','<leader>p', builtin.find_files, {desc = '[F]ind files'})
+vim.keymap.set('n','<leader>fg', builtin.live_grep, {desc = '[F]ind [G]rep'})
+vim.keymap.set('n','<leader>fw', builtin.grep_string, {desc = '[F]ind [W]ord'})
+vim.keymap.set('n','<leader>fs', builtin.git_status, {desc = '[F]ind Git [S]tatus'})
+vim.keymap.set('n','<leader>fd', builtin.diagnostics, {desc = '[F]ind [D]iagnostics'})
+vim.keymap.set('n','<leader>fb', builtin.git_branches, {desc = '[F]ind Git [B]ranches'})
+vim.keymap.set('n','<leader>ff', builtin.buffers, {desc = '[F]ind Bu[f]fers'})
+vim.keymap.set('n','<leader>fh', builtin.help_tags, {desc = '[F]ind [H]elp'})
