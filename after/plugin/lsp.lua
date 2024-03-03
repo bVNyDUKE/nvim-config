@@ -38,14 +38,16 @@ lsp.configure('tsserver', {
 
 -- Config for no LspSaga
 lsp.on_attach(function(_, bufnr)
-  local opts = {buffer = bufnr, remap = false}
-  local bind = vim.keymap.set
-  bind('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  bind('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  bind('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  bind('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  bind('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  bind('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  lsp.default_keymaps({bufnr = bufnr})
+  local map = function(keys, func)
+    vim.keymap.set('n', keys, func, {buffer = bufnr, remap = false})
+  end
+  map(']g', vim.diagnostic.goto_next)
+  map('[g', vim.diagnostic.goto_prev)
+  map('<leader>ca', vim.lsp.buf.code_action)
+  map('K', vim.lsp.buf.hover)
+  map('gR',vim.lsp.buf.rename)
+  map('gr', require('telescope.builtin').lsp_references)
 end)
 
 lsp.setup()
