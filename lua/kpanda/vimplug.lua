@@ -2,17 +2,18 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 --Themes
-Plug 'navarasu/onedark.nvim'
+-- Plug 'navarasu/onedark.nvim'
 Plug('folke/tokyonight.nvim', { branch = 'main' })
-Plug 'kvrohit/mellow.nvim'
-Plug('catppuccin/nvim', { as = 'catppuccin' })
-Plug 'rose-pine/neovim'
+-- Plug 'kvrohit/mellow.nvim'
+-- Plug('catppuccin/nvim', { as = 'catppuccin' })
+-- Plug 'rose-pine/neovim'
 Plug 'rebelot/kanagawa.nvim'
-Plug('bluz71/vim-nightfly-colors', { as = 'nightfly' })
-Plug 'loctvl842/monokai-pro.nvim'
-Plug 'sainnhe/sonokai'
-Plug 'ellisonleao/gruvbox.nvim'
-Plug 'projekt0n/github-nvim-theme'
+Plug 'ayu-theme/ayu-vim'
+-- Plug('bluz71/vim-nightfly-colors', { as = 'nightfly' })
+-- Plug 'loctvl842/monokai-pro.nvim'
+-- Plug 'sainnhe/sonokai'
+-- Plug 'ellisonleao/gruvbox.nvim'
+-- Plug 'projekt0n/github-nvim-theme'
 
 Plug 'lewis6991/impatient.nvim'
 
@@ -22,7 +23,7 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
 end
 })
 
--- Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'windwp/nvim-autopairs'
 
 -- LSP Support
