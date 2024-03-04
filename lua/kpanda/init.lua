@@ -2,32 +2,34 @@ require('kpanda.set')
 require('kpanda.vimplug')
 require('impatient')
 require('kpanda.telescope')
-require('kanagawa').setup({
-  colors = {
-      theme = {
-          all = {
-              ui = {
-                  nontext  = "grey"
-              }
-          }
-      }
-  }
-})
 
-require("gruvbox").setup({
-  contrast = "hard",
-  inverse = true,
-  overrides = {
-    LineNr = { fg = "grey" }
-  },
-  palette_overrides = {
-    bright_red = "#de5050"
-  }
-})
+ require('kanagawa').setup({
+   colors = {
+       theme = {
+           all = {
+               ui = {
+                   nontext  = "grey"
+               }
+           }
+       }
+   }
+ })
+
+-- require("gruvbox").setup({
+--   contrast = "hard",
+--   inverse = true,
+--   overrides = {
+--     LineNr = { fg = "grey" }
+--   },
+--   palette_overrides = {
+--     bright_red = "#de5050"
+--   }
+-- })
 
 -- vim.o.background = "dark"
 -- vim.cmd("colorscheme gruvbox")
-vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme tokyonight-night")
+vim.cmd[[colorscheme kanagawa]]
 
 -- vim.cmd("let g:sonokai_style = 'andromeda'")
 -- vim.o.background="dark"
