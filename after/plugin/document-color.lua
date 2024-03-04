@@ -1,3 +1,3 @@
-require("document-color").setup{
-  mode = "background"
-}
+require("document-color").setup({
+	mode = "background",
+})

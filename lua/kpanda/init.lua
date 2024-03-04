@@ -1,7 +1,7 @@
-require('kpanda.set')
-require('kpanda.vimplug')
-require('impatient')
-require('kpanda.telescope')
+require("kpanda.set")
+require("kpanda.vimplug")
+require("impatient")
+require("kpanda.telescope")
 
 -- require("gruvbox").setup({
 --   contrast = "hard",
@@ -14,32 +14,31 @@ require('kpanda.telescope')
 --   }
 -- })
 
- require('kanagawa').setup({
-   colors = {
-       theme = {
-           all = {
-               ui = {
-                   nontext  = "grey"
-               }
-           }
-       }
-   },
-    overrides = function()
-    return {
-          NormalFloat = { bg = "none" },
-          FloatBorder = { bg = "none" },
-          FloatTitle = { bg = "none" },
-        }
-    end,
- })
+require("kanagawa").setup({
+	colors = {
+		theme = {
+			all = {
+				ui = {
+					nontext = "grey",
+				},
+			},
+		},
+	},
+	overrides = function()
+		return {
+			NormalFloat = { bg = "none" },
+			FloatBorder = { bg = "none" },
+			FloatTitle = { bg = "none" },
+		}
+	end,
+})
 
 vim.cmd("colorscheme kanagawa")
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking',
-  group = vim.api.nvim_create_augroup('k-highlight-yank', {clear = true}),
-  callback = function ()
-    vim.highlight.on_yank()
-  end
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking",
+	group = vim.api.nvim_create_augroup("k-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
-
