@@ -1,3 +1,8 @@
+local neogit = require("neogit")
+neogit.setup({})
+
+vim.keymap.set("n", "<leader>ng", neogit.open)
+
 require("gitsigns").setup({
 	sign_priority = 3,
 	current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",

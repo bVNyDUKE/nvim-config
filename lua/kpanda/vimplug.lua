@@ -58,14 +58,14 @@ Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-lualine/lualine.nvim")
 Plug("WhoIsSethDaniel/lualine-lsp-progress.nvim")
 
---Plug 'airblade/vim-gitgutter'
 Plug("lewis6991/gitsigns.nvim")
+-- Plug("tpope/vim-fugitive")
+Plug("NeogitOrg/neogit")
 
 Plug("kyazdani42/nvim-web-devicons")
 Plug("kyazdani42/nvim-tree.lua")
 -- Plug 'lukas-reineke/indent-blankline.nvim'
 
-Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
 Plug("tpope/vim-commentary")
 Plug("tpope/vim-sleuth")
