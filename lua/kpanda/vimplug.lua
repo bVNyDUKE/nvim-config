@@ -20,7 +20,7 @@ Plug("nvim-treesitter/nvim-treesitter", {
 })
 
 Plug("nvim-treesitter/nvim-treesitter-context")
-Plug("echasnovski/mini.pairs")
+Plug("windwp/nvim-autopairs")
 
 -- LSP Support
 Plug("neovim/nvim-lspconfig")

@@ -1,13 +1,7 @@
 local lsp = require("lsp-zero")
 local nvim_lsp = require("lspconfig")
 
-require("mini.pairs").setup()
-
 lsp.preset("recommended")
-
-lsp.ensure_installed({
-	"tsserver",
-})
 
 lsp.configure("tailwindcss", {
 	root_dir = nvim_lsp.util.root_pattern("tailwind.config.*"),
@@ -40,6 +34,9 @@ lsp.configure("lua_ls", {
 	},
 })
 
+lsp.ensure_installed({
+	"tsserver",
+})
 lsp.configure("tsserver", {
 	root_dir = nvim_lsp.util.root_pattern("package.json"),
 })
@@ -75,6 +72,10 @@ lsp.on_attach(function(_, bufnr)
 end)
 
 lsp.setup()
+
+require("nvim-autopairs").setup({
+	fast_wrap = {},
+})
 
 local null_ls = require("null-ls")
 local null_opts = lsp.build_options("null-ls", {})
@@ -138,9 +139,7 @@ null_ls.setup({
 	},
 })
 
-vim.cmd([[
-  command! -range=% Pfmt <line1>,<line2>!npx prettier --stdin-filepath %
-]])
+vim.cmd([[command! -range=% Pfmt <line1>,<line2>!npx prettier --stdin-filepath %]])
 
 -- Turn off semantic highlighting
 -- vim.api.nvim_create_autocmd('LspAttach', {
