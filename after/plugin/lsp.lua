@@ -34,11 +34,65 @@ lsp.configure("lua_ls", {
 	},
 })
 
+lsp.configure("gopls", {
+	settings = {
+		gopls = {
+			usePlaceholders = true,
+			gofumpt = true, -- probably doesnt work
+			analyses = {
+				nilness = true,
+				unusedparams = true,
+				unusedwrite = true,
+				useany = true,
+			},
+			codelenses = {
+				gc_details = false,
+				generate = true,
+				regenerate_cgo = true,
+				run_govulncheck = true,
+				test = true,
+				tidy = true,
+				upgrade_dependency = true,
+				vendor = true,
+			},
+			experimentalPostfixCompletions = true,
+			completeUnimported = true,
+			staticcheck = true,
+			directoryFilters = { "-.git", "-node_modules" },
+			semanticTokens = true,
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
+		},
+	},
+})
+
 lsp.ensure_installed({
 	"tsserver",
 })
+local js_inlay_hints = {
+	inlayHints = {
+		includeInlayEnumMemberValueHints = true,
+		includeInlayFunctionLikeReturnTypeHints = true,
+		includeInlayFunctionParameterTypeHints = true,
+		includeInlayParameterNameHints = "all",
+		includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+		includeInlayPropertyDeclarationTypeHints = true,
+		includeInlayVariableTypeHints = true,
+	},
+}
 lsp.configure("tsserver", {
 	root_dir = nvim_lsp.util.root_pattern("package.json"),
+	settings = {
+		typescript = js_inlay_hints,
+		javascipt = js_inlay_hints,
+	},
 })
 
 lsp.configure("denols", {
@@ -53,7 +107,16 @@ lsp.configure("svelte", {
 	},
 })
 
--- No LspSaga config
+local toggle_inlay_hints = function()
+	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
+	local state = "Enabled"
+	if enabled then
+		state = "Disabled"
+	end
+	vim.lsp.inlay_hint.enable(not enabled)
+	print(string.format("%s inlay hints", state))
+end
+
 lsp.on_attach(function(_, bufnr)
 	lsp.default_keymaps({ bufnr = bufnr })
 	local map = function(keys, func)
@@ -63,8 +126,8 @@ lsp.on_attach(function(_, bufnr)
 	map("[g", vim.diagnostic.goto_prev)
 	map("<leader>ca", vim.lsp.buf.code_action)
 	map("<leader>vr", vim.lsp.buf.references)
-	map("K", vim.lsp.buf.hover)
 	map("gR", vim.lsp.buf.rename)
+	map("<leader>i", toggle_inlay_hints)
 	map("gr", require("telescope.builtin").lsp_references)
 	map("gd", require("telescope.builtin").lsp_definitions)
 	map("<leader>ds", require("telescope.builtin").lsp_document_symbols)

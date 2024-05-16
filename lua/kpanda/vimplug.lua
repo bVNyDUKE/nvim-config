@@ -2,15 +2,8 @@ local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin", "/home/kpanda/.config/nvim/plugged")
 --Themes
-Plug("AlexvZyl/nordic.nvim")
-Plug("navarasu/onedark.nvim")
-Plug("folke/tokyonight.nvim", { branch = "main" })
-Plug("catppuccin/nvim", { as = "catppuccin" })
-Plug("rose-pine/neovim")
 Plug("rebelot/kanagawa.nvim")
 Plug("ellisonleao/gruvbox.nvim")
-Plug("projekt0n/github-nvim-theme")
-Plug("loctvl842/monokai-pro.nvim")
 
 Plug("mrshmllow/document-color")
 Plug("nvim-treesitter/nvim-treesitter", {
@@ -19,7 +12,6 @@ Plug("nvim-treesitter/nvim-treesitter", {
 	end,
 })
 
-Plug("nvim-treesitter/nvim-treesitter-context")
 Plug("windwp/nvim-autopairs")
 
 -- LSP Support
@@ -59,7 +51,6 @@ Plug("kyazdani42/nvim-tree.lua")
 
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
-Plug("tpope/vim-commentary")
 Plug("tpope/vim-sleuth")
 
 vim.call("plug#end")
