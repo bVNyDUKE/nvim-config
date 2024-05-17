@@ -1,6 +1,6 @@
 require("kpanda.set")
 require("kpanda.vimplug")
-require("impatient")
+vim.loader.enable()
 require("kpanda.telescope")
 
 -- require("gruvbox").setup({

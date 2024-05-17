@@ -1,21 +1,12 @@
+require("mason").setup()
+require("mason-lspconfig").setup()
 local lsp = require("lsp-zero")
-local autopairs = require("nvim-autopairs")
 local nvim_lsp = require("lspconfig")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-	"tsserver",
-})
-
-lsp.set_preferences({
-	suggest_lsp_servers = false,
-	sign_icons = {
-		error = "E",
-		warn = "W",
-		hint = "H",
-		info = "I",
-	},
+lsp.configure("denols", {
+	root_dir = nvim_lsp.util.root_pattern("deno.json"),
 })
 
 lsp.configure("lua_ls", {
@@ -44,7 +35,6 @@ lsp.on_attach(function(_, bufnr)
 	map("]g", vim.diagnostic.goto_next)
 	map("[g", vim.diagnostic.goto_prev)
 	map("<leader>ca", vim.lsp.buf.code_action)
-	map("K", vim.lsp.buf.hover)
 	map("gR", vim.lsp.buf.rename)
 	map("gr", require("telescope.builtin").lsp_references)
 	map("gd", require("telescope.builtin").lsp_definitions)
@@ -53,7 +43,9 @@ end)
 
 lsp.setup()
 
-autopairs.setup({})
+require("nvim-autopairs").setup({
+	fast_wrap = {},
+})
 
 local null_ls = require("null-ls")
 local null_opts = lsp.build_options("null-ls", {})

@@ -3,19 +3,14 @@ local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 --Themes
 -- Plug 'navarasu/onedark.nvim'
-Plug("folke/tokyonight.nvim", { branch = "main" })
--- Plug 'kvrohit/mellow.nvim'
 -- Plug('catppuccin/nvim', { as = 'catppuccin' })
--- Plug 'rose-pine/neovim'
-Plug("rebelot/kanagawa.nvim")
-Plug("ayu-theme/ayu-vim")
 -- Plug('bluz71/vim-nightfly-colors', { as = 'nightfly' })
 -- Plug 'loctvl842/monokai-pro.nvim'
 -- Plug 'sainnhe/sonokai'
 -- Plug 'ellisonleao/gruvbox.nvim'
 -- Plug 'projekt0n/github-nvim-theme'
-
-Plug("lewis6991/impatient.nvim")
+-- Plug("folke/tokyonight.nvim", { branch = "main" })
+Plug("rebelot/kanagawa.nvim")
 
 Plug("mrshmllow/document-color")
 Plug("nvim-treesitter/nvim-treesitter", {
@@ -24,14 +19,12 @@ Plug("nvim-treesitter/nvim-treesitter", {
 	end,
 })
 
-Plug("nvim-treesitter/nvim-treesitter-context")
 Plug("windwp/nvim-autopairs")
 
 -- LSP Support
 Plug("neovim/nvim-lspconfig")
 Plug("williamboman/mason.nvim")
 Plug("williamboman/mason-lspconfig.nvim")
-Plug("nvimdev/lspsaga.nvim")
 
 -- Formatting
 Plug("lukas-reineke/lsp-format.nvim")
@@ -51,23 +44,17 @@ Plug("rafamadriz/friendly-snippets")
 
 Plug("VonHeikemen/lsp-zero.nvim")
 
-Plug("glepnir/lspsaga.nvim", { branch = "main" })
-
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-lualine/lualine.nvim")
-Plug("WhoIsSethDaniel/lualine-lsp-progress.nvim")
 
 Plug("lewis6991/gitsigns.nvim")
--- Plug("tpope/vim-fugitive")
-Plug("NeogitOrg/neogit")
 
 Plug("kyazdani42/nvim-web-devicons")
 Plug("kyazdani42/nvim-tree.lua")
--- Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
-Plug("tpope/vim-commentary")
 Plug("tpope/vim-sleuth")
 
 vim.call("plug#end")

@@ -1,7 +1,7 @@
-local neogit = require("neogit")
-neogit.setup({})
+-- local neogit = require("neogit")
+-- neogit.setup({})
 
-vim.keymap.set("n", "<leader>ng", neogit.open)
+vim.keymap.set("n", "<leader>ng", ":G <CR>")
 
 require("gitsigns").setup({
 	sign_priority = 3,
