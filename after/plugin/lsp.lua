@@ -33,10 +33,35 @@ lsp.configure("lua_ls", {
 -- lsp.configure('eslint',{
 --   working_directories = {"./frontend"}
 -- })
-
+--
+local js_inlay_hints = {
+	inlayHints = {
+		includeInlayEnumMemberValueHints = true,
+		includeInlayFunctionLikeReturnTypeHints = true,
+		includeInlayFunctionParameterTypeHints = true,
+		includeInlayParameterNameHints = "all",
+		includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+		includeInlayPropertyDeclarationTypeHints = true,
+		includeInlayVariableTypeHints = true,
+	},
+}
 lsp.configure("tsserver", {
 	root_dir = nvim_lsp.util.root_pattern("package.json"),
+	settings = {
+		typescript = js_inlay_hints,
+		javascript = js_inlay_hints,
+	},
 })
+
+local toggle_inlay_hints = function()
+	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
+	local state = "Enabled"
+	if enabled then
+		state = "Disabled"
+	end
+	vim.lsp.inlay_hint.enable(not enabled)
+	print(string.format("%s inlay hints", state))
+end
 
 lsp.on_attach(function(_, bufnr)
 	lsp.default_keymaps({ bufnr = bufnr })
@@ -50,6 +75,7 @@ lsp.on_attach(function(_, bufnr)
 	map("gr", require("telescope.builtin").lsp_references)
 	map("gd", require("telescope.builtin").lsp_definitions)
 	map("<leader>ds", require("telescope.builtin").lsp_document_symbols)
+	map("<leader>i", toggle_inlay_hints)
 end)
 
 lsp.setup()
