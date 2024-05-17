@@ -1,40 +1,22 @@
-local lsp = require("lsp-zero")
-local nvim_lsp = require("lspconfig")
+require("mason").setup()
+require("mason-lspconfig").setup()
+local lsp_zero = require("lsp-zero")
+local lsp = require("lspconfig")
 
-lsp.preset("recommended")
+local lua_opts = lsp_zero.nvim_lua_ls()
+lsp.lua_ls.setup(lua_opts)
 
-lsp.configure("tailwindcss", {
-	root_dir = nvim_lsp.util.root_pattern("tailwind.config.*"),
+lsp.tailwindcss.setup({
+	root_dir = lsp.util.root_pattern("tailwind.config.*"),
 })
 
-lsp.set_preferences({
-	suggest_lsp_servers = false,
-	sign_icons = {
-		error = "E",
-		warn = "W",
-		hint = "H",
-		info = "I",
-	},
-	set_lsp_keymaps = false,
-})
-
-lsp.configure("intelephense", {
+lsp_zero.configure("intelephense", {
 	init_options = {
 		globalStoragePath = os.getenv("HOME") .. "/.local/share/intelephense",
 	},
 })
 
-lsp.configure("lua_ls", {
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim" },
-			},
-		},
-	},
-})
-
-lsp.configure("gopls", {
+lsp.gopls.setup({
 	settings = {
 		gopls = {
 			usePlaceholders = true,
@@ -73,9 +55,6 @@ lsp.configure("gopls", {
 	},
 })
 
-lsp.ensure_installed({
-	"tsserver",
-})
 local js_inlay_hints = {
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
@@ -87,19 +66,19 @@ local js_inlay_hints = {
 		includeInlayVariableTypeHints = true,
 	},
 }
-lsp.configure("tsserver", {
-	root_dir = nvim_lsp.util.root_pattern("package.json"),
+lsp.tsserver.setup({
+	root_dir = lsp.util.root_pattern("package.json"),
 	settings = {
 		typescript = js_inlay_hints,
 		javascipt = js_inlay_hints,
 	},
 })
 
-lsp.configure("denols", {
-	root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+lsp.denols.setup({
+	root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
 })
 
-lsp.configure("svelte", {
+lsp.svelte.setup({
 	settings = {
 		Svelte = {
 			["enable-ts-plugin"] = false,
@@ -117,8 +96,8 @@ local toggle_inlay_hints = function()
 	print(string.format("%s inlay hints", state))
 end
 
-lsp.on_attach(function(_, bufnr)
-	lsp.default_keymaps({ bufnr = bufnr })
+lsp_zero.on_attach(function(_, bufnr)
+	lsp_zero.default_keymaps({ bufnr = bufnr })
 	local map = function(keys, func)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false })
 	end
@@ -134,14 +113,14 @@ lsp.on_attach(function(_, bufnr)
 	map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols)
 end)
 
-lsp.setup()
+lsp_zero.setup()
 
 require("nvim-autopairs").setup({
 	fast_wrap = {},
 })
 
 local null_ls = require("null-ls")
-local null_opts = lsp.build_options("null-ls", {})
+local null_opts = lsp_zero.build_options("null-ls", {})
 null_ls.setup({
 	on_attach = function(client, bufnr)
 		null_opts.on_attach(client, bufnr)
