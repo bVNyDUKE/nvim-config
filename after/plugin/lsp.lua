@@ -5,6 +5,17 @@ local nvim_lsp = require("lspconfig")
 
 lsp.preset("recommended")
 
+lsp.set_preferences({
+	suggest_lsp_servers = false,
+	sign_icons = {
+		error = "E",
+		warn = "W",
+		hint = "H",
+		info = "I",
+	},
+	set_lsp_keymaps = false,
+})
+
 lsp.configure("denols", {
 	root_dir = nvim_lsp.util.root_pattern("deno.json"),
 })
