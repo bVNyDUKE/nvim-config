@@ -5,7 +5,7 @@ vim.call("plug#begin", "/home/kpanda/.config/nvim/plugged")
 Plug("rebelot/kanagawa.nvim")
 Plug("ellisonleao/gruvbox.nvim")
 
-Plug("mrshmllow/document-color")
+-- Plug("mrshmllow/document-color")
 Plug("nvim-treesitter/nvim-treesitter", {
 	["do"] = function()
 		vim.cmd(":TSUpdate")

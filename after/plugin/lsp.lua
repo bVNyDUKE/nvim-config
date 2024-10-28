@@ -147,10 +147,6 @@ null_ls.setup({
 		null_opts.on_attach(client, bufnr)
 
 		require("lsp-format").on_attach(client)
-
-		if client.server_capabilities.colorProvider then
-			require("document-color").buf_attach(bufnr)
-		end
 	end,
 
 	-- Vue setup:
