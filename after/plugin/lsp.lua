@@ -30,6 +30,16 @@ lsp.configure("lua_ls", {
 	},
 })
 
+lsp.configure("pyright", {
+	settings = {
+		python = {
+			analysis = {
+				useLibraryCodeForType = true,
+			},
+		},
+	},
+})
+
 -- lsp.configure('eslint',{
 --   working_directories = {"./frontend"}
 -- })
@@ -103,13 +113,17 @@ null_ls.setup({
 	-- prettierd - default
 	sources = {
 		null_ls.builtins.diagnostics.eslint,
-		null_ls.builtins.code_actions.eslint,
+		null_ls.builtins.code_actions.eslint.with({
+			env = {
+				ESLINT_USE_FLAT_CONFIG = false,
+			},
+		}),
 		null_ls.builtins.formatting.eslint,
 		null_ls.builtins.formatting.gofmt,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.prettier.with({
 			only_local = "node_modules/.bin",
-			disabled_filetypes = { "vue" },
+			disabled_filetypes = { "vue", "html", "yml", "yaml" },
 			extra_filetypes = { "astro" },
 		}),
 	},
