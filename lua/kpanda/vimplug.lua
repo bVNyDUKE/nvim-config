@@ -40,7 +40,6 @@ Plug("VonHeikemen/lsp-zero.nvim", { branch = "v1.x" })
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-lualine/lualine.nvim")
-Plug("WhoIsSethDaniel/lualine-lsp-progress.nvim")
 
 Plug("lewis6991/gitsigns.nvim")
 Plug("lewis6991/impatient.nvim")
