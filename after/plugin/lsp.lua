@@ -74,7 +74,7 @@ lsp.configure("gopls", {
 })
 
 lsp.ensure_installed({
-	"tsserver",
+	"ts_ls",
 })
 local js_inlay_hints = {
 	inlayHints = {
