@@ -3,7 +3,7 @@ local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "/home/kpanda/.config/nvim/plugged")
 --Themes
 Plug("rebelot/kanagawa.nvim")
-Plug("ellisonleao/gruvbox.nvim")
+-- Plug("ellisonleao/gruvbox.nvim")
 
 -- Plug("mrshmllow/document-color")
 Plug("nvim-treesitter/nvim-treesitter", {
@@ -31,6 +31,10 @@ Plug("saadparwaiz1/cmp_luasnip")
 Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/cmp-nvim-lua")
 
+--  Snippets
+-- Plug("L3MON4D3/LuaSnip")
+-- Plug("rafamadriz/friendly-snippets")
+
 Plug("VonHeikemen/lsp-zero.nvim", { branch = "v1.x" })
 
 Plug("nvim-lua/plenary.nvim")
@@ -38,7 +42,6 @@ Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-lualine/lualine.nvim")
 
 Plug("lewis6991/gitsigns.nvim")
-Plug("lewis6991/impatient.nvim")
 
 Plug("kyazdani42/nvim-web-devicons")
 Plug("kyazdani42/nvim-tree.lua")
