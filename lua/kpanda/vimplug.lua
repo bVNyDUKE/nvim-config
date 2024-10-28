@@ -12,7 +12,6 @@ vim.call("plug#begin")
 -- Plug("folke/tokyonight.nvim", { branch = "main" })
 Plug("rebelot/kanagawa.nvim")
 
-Plug("mrshmllow/document-color")
 Plug("nvim-treesitter/nvim-treesitter", {
 	["do"] = function()
 		vim.cmd(":TSUpdate")
@@ -39,8 +38,8 @@ Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/cmp-nvim-lua")
 
 --  Snippets
-Plug("L3MON4D3/LuaSnip")
-Plug("rafamadriz/friendly-snippets")
+-- Plug("L3MON4D3/LuaSnip")
+-- Plug("rafamadriz/friendly-snippets")
 
 Plug("VonHeikemen/lsp-zero.nvim", { branch = "v1.x" })
 
