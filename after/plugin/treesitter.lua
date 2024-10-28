@@ -9,6 +9,7 @@ require("nvim-treesitter.configs").setup({
 		"rust",
 		"go",
 		"vim",
+		"vimdoc",
 		"yaml",
 		"toml",
 		"typescript",
@@ -17,7 +18,6 @@ require("nvim-treesitter.configs").setup({
 		"phpdoc",
 		"html",
 		"php",
-		"prisma",
 	},
 	sync_install = false,
 	highlight = {
