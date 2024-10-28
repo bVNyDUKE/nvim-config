@@ -5,7 +5,6 @@ vim.call("plug#begin", "/home/kpanda/.config/nvim/plugged")
 Plug("rebelot/kanagawa.nvim")
 -- Plug("ellisonleao/gruvbox.nvim")
 
--- Plug("mrshmllow/document-color")
 Plug("nvim-treesitter/nvim-treesitter", {
 	["do"] = function()
 		vim.cmd(":TSUpdate")
@@ -30,10 +29,6 @@ Plug("hrsh7th/cmp-path")
 Plug("saadparwaiz1/cmp_luasnip")
 Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/cmp-nvim-lua")
-
---  Snippets
--- Plug("L3MON4D3/LuaSnip")
--- Plug("rafamadriz/friendly-snippets")
 
 Plug("VonHeikemen/lsp-zero.nvim", { branch = "v1.x" })
 
