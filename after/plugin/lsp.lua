@@ -55,7 +55,7 @@ local js_inlay_hints = {
 		includeInlayVariableTypeHints = true,
 	},
 }
-lsp.configure("tsserver", {
+lsp.configure("ts_ls", {
 	root_dir = nvim_lsp.util.root_pattern("package.json"),
 	settings = {
 		typescript = js_inlay_hints,
