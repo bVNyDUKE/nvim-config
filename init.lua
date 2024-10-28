@@ -1,1 +1,2 @@
-require('kpanda')
+vim.loader.enable()
+require("kpanda")
