@@ -23,8 +23,23 @@ lsp.configure("denols", {
 lsp.configure("lua_ls", {
 	settings = {
 		Lua = {
+			runtime = {
+				version = "LuaJIT",
+				path = vim.split(package.path, ";"),
+			},
 			diagnostics = {
 				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					vim.fn.expand("$VIMRUNTIME/lua"),
+					vim.fn.stdpath("config") .. "/lua",
+				},
+				maxPreload = 1000,
+				preloadFileSize = 500,
+			},
+			telemetry = {
+				enable = false,
 			},
 		},
 	},
