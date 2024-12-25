@@ -1,6 +1,7 @@
 require("kpanda.set")
 require("kpanda.vimplug")
 require("kpanda.telescope")
+require("kpanda.terminal")
 
 -- require("gruvbox").setup({
 --   contrast = "hard",
