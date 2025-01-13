@@ -34,7 +34,7 @@ require("gitsigns").setup({
 		end)
 
 		map("n", "ghs", gs.stage_hunk)
-		map("n", "ghr", gs.reset_hunk)
+		map("n", "ghu", gs.reset_hunk)
 		map("v", "ghs", function()
 			gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 		end)
@@ -42,7 +42,7 @@ require("gitsigns").setup({
 			gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 		end)
 
-		map("n", "ghu", gs.undo_stage_hunk)
+		map("n", "ghU", gs.undo_stage_hunk)
 		map("n", "ghS", gs.stage_buffer)
 		map("n", "ghR", gs.reset_buffer)
 		map("n", "ghp", gs.preview_hunk)
