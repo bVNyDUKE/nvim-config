@@ -1,7 +1,7 @@
 vim.loader.enable()
 require("kpanda.set")
 require("kpanda.vimplug")
-require("kpanda.telescope")
+require("kpanda.snacks")
 
 --vim.cmd("colorscheme monokai-pro")
 --vim.cmd("colorscheme github_dark_dimmed")
