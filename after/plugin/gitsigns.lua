@@ -1,6 +1,6 @@
-vim.cmd([[ command! -nargs=0 Ggp terminal git push origin ${git_current_branch} ]])
+local gs = require("gitsigns")
 
-require("gitsigns").setup({
+gs.setup({
 	sign_priority = 3,
 	on_attach = function(bufnr)
 		local function map(mode, lhs, rhs, opts)
@@ -19,7 +19,9 @@ require("gitsigns").setup({
 		map("n", "ghU", "<cmd>Gitsigns undo_stage_hunk<CR>")
 		map("n", "ghR", "<cmd>Gitsigns reset_buffer<CR>")
 		map("n", "ghp", "<cmd>Gitsigns preview_hunk<CR>")
-		map("n", "ghb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+		vim.keymap.set("n", "ghb", function()
+			gs.blame_line({ full = true })
+		end)
 		map("n", "gtb", "<cmd>Gitsigns toggle_current_line_blame<CR>")
 		map("n", "ghd", "<cmd>Gitsigns diffthis<CR>")
 		map("n", "ghD", '<cmd>lua require"gitsigns".diffthis("~")<CR>')

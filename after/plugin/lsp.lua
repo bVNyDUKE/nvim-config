@@ -3,10 +3,6 @@ local nvim_lsp = require("lspconfig")
 
 lsp.preset("recommended")
 
-lsp.configure("tailwindcss", {
-	root_dir = nvim_lsp.util.root_pattern("tailwind.config.*"),
-})
-
 lsp.set_preferences({
 	suggest_lsp_servers = false,
 	sign_icons = {
@@ -27,8 +23,17 @@ lsp.configure("intelephense", {
 lsp.configure("lua_ls", {
 	settings = {
 		Lua = {
+			runtime = {
+				version = "LuaJIT",
+				path = vim.split(package.path, ";"),
+			},
 			diagnostics = {
 				globals = { "vim" },
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+				ignoreDir = { ".git", "plugged" },
 			},
 		},
 	},
