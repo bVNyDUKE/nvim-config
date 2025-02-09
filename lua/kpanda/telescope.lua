@@ -28,7 +28,7 @@ local themed = function(picker)
 	end
 end
 
--- vim.keymap.set("n", "<leader>p", themed("find_files"), { desc = "[F]ind files" })
+vim.keymap.set("n", "<leader>p", themed("find_files"), { desc = "[F]ind files" })
 vim.keymap.set("n", "<leader>fg", themed("live_grep"), { desc = "[F]ind [G]rep" })
 vim.keymap.set("n", "<leader>fw", themed("grep_string"), { desc = "[F]ind [W]ord" })
 vim.keymap.set("n", "<leader>fs", themed("git_status"), { desc = "[F]ind Git [S]tatus" })
