@@ -15,3 +15,24 @@ vim.keymap.set("n", "<leader>k", "<C-w>k")
 vim.keymap.set("n", "<leader>l", "<C-w>l")
 vim.keymap.set("n", "<leader>h", "<C-w>h")
 -- vim.keymap.set("n", "<cr>", "ciw")
+
+local function set_big_screen_keys()
+	vim.keymap.set("n", "<C-1>", "1gt")
+	vim.keymap.set("n", "<C-2>", "2gt")
+	vim.keymap.set("n", "<C-3>", "3gt")
+	vim.keymap.set("n", "<C-4>", "4gt")
+	vim.keymap.set("n", "<C-5>", "5gt")
+	vim.keymap.set("n", "<C-6>", "6gt")
+end
+
+local function set_laptop_keys()
+	vim.keymap.set("n", "<leader>1", "1gt")
+	vim.keymap.set("n", "<leader>2", "2gt")
+	vim.keymap.set("n", "<leader>3", "3gt")
+	vim.keymap.set("n", "<leader>4", "4gt")
+	vim.keymap.set("n", "<leader>5", "5gt")
+	vim.keymap.set("n", "<leader>6", "6gt")
+end
+
+vim.api.nvim_create_user_command("KeysBig", set_big_screen_keys, {})
+vim.api.nvim_create_user_command("KeysSmall", set_laptop_keys, {})

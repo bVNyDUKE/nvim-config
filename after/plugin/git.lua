@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>ng", ":G <CR>")
+vim.keymap.set("n", "<leader>g", ":G <CR>")
 
 require("gitsigns").setup({
 	sign_priority = 3,

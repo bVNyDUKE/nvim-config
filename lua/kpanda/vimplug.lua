@@ -2,7 +2,7 @@ local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin")
 --Themes
--- Plug 'navarasu/onedark.nvim'
+Plug("navarasu/onedark.nvim")
 -- Plug('catppuccin/nvim', { as = 'catppuccin' })
 -- Plug('bluz71/vim-nightfly-colors', { as = 'nightfly' })
 -- Plug 'loctvl842/monokai-pro.nvim'
@@ -55,5 +55,10 @@ Plug("kyazdani42/nvim-tree.lua")
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
 Plug("tpope/vim-sleuth")
+
+-- Color preview
+Plug("catgoose/nvim-colorizer.lua")
+
+Plug("windwp/nvim-ts-autotag")
 
 vim.call("plug#end")

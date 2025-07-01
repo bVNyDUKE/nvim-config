@@ -20,6 +20,30 @@ lsp.configure("denols", {
 	root_dir = nvim_lsp.util.root_pattern("deno.json"),
 })
 
+lsp.configure("jdtls", {
+	settings = {
+		redhat = {
+			telemetry = {
+				enabled = false,
+			},
+		},
+		java = {
+			import = {
+				gradle = {
+					enabled = false,
+				},
+			},
+			jdt = {
+				ls = {
+					androidSupport = {
+						enabled = false,
+					},
+				},
+			},
+		},
+	},
+})
+
 lsp.configure("lua_ls", {
 	settings = {
 		Lua = {
@@ -70,13 +94,31 @@ local js_inlay_hints = {
 		includeInlayVariableTypeHints = true,
 	},
 }
+
+local mason_registry = require("mason-registry")
+local vue_lsp_path = mason_registry.get_package("vue-language-server"):get_install_path()
+	.. "/node_modules/@vue/language-server"
+
 lsp.configure("ts_ls", {
-	root_dir = nvim_lsp.util.root_pattern("package.json"),
+	-- root_dir = nvim_lsp.util.root_pattern("package.json"),
+	-- init_options for vue
+	init_options = {
+		plugins = {
+			{
+				name = "@vue/typescript-plugin",
+				location = vue_lsp_path,
+				languages = { "vue" },
+			},
+		},
+	},
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 	settings = {
 		typescript = js_inlay_hints,
 		javascript = js_inlay_hints,
 	},
 })
+
+lsp.configure("volar", {})
 
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
@@ -134,7 +176,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.prettier.with({
 			only_local = "node_modules/.bin",
-			disabled_filetypes = { "vue", "html", "yml", "yaml" },
+			disabled_filetypes = { "html", "yml", "yaml" },
 			extra_filetypes = { "astro" },
 		}),
 	},

@@ -2,6 +2,26 @@ local actions = require("telescope.actions")
 
 require("telescope").setup({
 	defaults = {
+		vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--smart-case",
+			"--hidden",
+
+			-- Exclude some patterns from search
+			"--glob=!**/node_modules/*",
+			"--glob=!**/.git/*",
+			"--glob=!**/.idea/*",
+			"--glob=!**/.vscode/*",
+			"--glob=!**/build/*",
+			"--glob=!**/dist/*",
+			"--glob=!**/yarn.lock",
+			"--glob=!**/package-lock.json",
+		},
 		layout_strategy = "vertical",
 		preview_cutoff = 20,
 		file_ignore_patterns = {
@@ -16,10 +36,25 @@ require("telescope").setup({
 		},
 	},
 	pickers = {
+		fd = {
+			hidden = true,
+			find_command = {
+				"rg",
+				"--files",
+				"--hidden",
+				"--glob=!**/node_modules/*",
+				"--glob=!**/.git/*",
+				"--glob=!**/.idea/*",
+				"--glob=!**/.vscode/*",
+				"--glob=!**/build/*",
+				"--glob=!**/dist/*",
+				"--glob=!**/yarn.lock",
+				"--glob=!**/package-lock.json",
+			},
+		},
 		lsp_references = {
 			fname_width = 60,
 			include_current_line = true,
-			include_declaration = false,
 			jump_type = "tab",
 		},
 	},
