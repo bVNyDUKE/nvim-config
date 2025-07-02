@@ -3,13 +3,7 @@ local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 --Themes
 Plug("navarasu/onedark.nvim")
--- Plug('catppuccin/nvim', { as = 'catppuccin' })
--- Plug('bluz71/vim-nightfly-colors', { as = 'nightfly' })
--- Plug 'loctvl842/monokai-pro.nvim'
--- Plug 'sainnhe/sonokai'
 -- Plug 'ellisonleao/gruvbox.nvim'
--- Plug 'projekt0n/github-nvim-theme'
--- Plug("folke/tokyonight.nvim", { branch = "main" })
 Plug("rebelot/kanagawa.nvim")
 
 Plug("nvim-treesitter/nvim-treesitter", {
@@ -19,6 +13,7 @@ Plug("nvim-treesitter/nvim-treesitter", {
 })
 
 Plug("windwp/nvim-autopairs")
+Plug("windwp/nvim-ts-autotag")
 
 -- LSP Support
 Plug("neovim/nvim-lspconfig")
@@ -37,14 +32,10 @@ Plug("saadparwaiz1/cmp_luasnip")
 Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/cmp-nvim-lua")
 
---  Snippets
--- Plug("L3MON4D3/LuaSnip")
--- Plug("rafamadriz/friendly-snippets")
-
 Plug("VonHeikemen/lsp-zero.nvim", { branch = "v1.x" })
 
 Plug("nvim-lua/plenary.nvim")
-Plug("nvim-telescope/telescope.nvim")
+Plug("folke/snacks.nvim")
 Plug("nvim-lualine/lualine.nvim")
 
 Plug("lewis6991/gitsigns.nvim")
@@ -58,7 +49,5 @@ Plug("tpope/vim-sleuth")
 
 -- Color preview
 Plug("catgoose/nvim-colorizer.lua")
-
-Plug("windwp/nvim-ts-autotag")
 
 vim.call("plug#end")

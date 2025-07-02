@@ -1,7 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
 local lsp = require("lsp-zero")
-local nvim_lsp = require("lspconfig")
 
 lsp.preset("recommended")
 
@@ -14,10 +13,6 @@ lsp.set_preferences({
 		info = "I",
 	},
 	set_lsp_keymaps = false,
-})
-
-lsp.configure("denols", {
-	root_dir = nvim_lsp.util.root_pattern("deno.json"),
 })
 
 lsp.configure("jdtls", {
@@ -55,15 +50,9 @@ lsp.configure("lua_ls", {
 				globals = { "vim" },
 			},
 			workspace = {
-				library = {
-					vim.fn.expand("$VIMRUNTIME/lua"),
-					vim.fn.stdpath("config") .. "/lua",
-				},
-				maxPreload = 1000,
-				preloadFileSize = 500,
-			},
-			telemetry = {
-				enable = false,
+				library = vim.api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+				ignoreDir = {".git", "plugged"},
 			},
 		},
 	},
@@ -139,9 +128,10 @@ lsp.on_attach(function(_, bufnr)
 	map("[g", vim.diagnostic.goto_prev)
 	map("<leader>ca", vim.lsp.buf.code_action)
 	map("gR", vim.lsp.buf.rename)
-	map("gr", require("telescope.builtin").lsp_references)
-	map("gd", require("telescope.builtin").lsp_definitions)
-	map("<leader>ds", require("telescope.builtin").lsp_document_symbols)
+	map("gr", Snacks.picker.lsp_references)
+	map("gd", Snacks.picker.lsp_definitions)
+	map("<leader>ds", Snacks.picker.lsp_symbols)
+	map("<leader>ds", Snacks.picker.lsp_workspace_symbols)
 	map("<leader>i", toggle_inlay_hints)
 end)
 

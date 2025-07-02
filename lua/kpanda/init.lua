@@ -1,6 +1,6 @@
 require("kpanda.set")
 require("kpanda.vimplug")
-require("kpanda.telescope")
+require("kpanda.snacks")
 require("kpanda.terminal")
 require("kpanda.theme")
 
