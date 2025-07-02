@@ -1,4 +1,7 @@
 require("nvim-treesitter.configs").setup({
+	ignore_install = {},
+	modules = {},
+	auto_install = false,
 	ensure_installed = { "lua", "javascript", "typescript", "vue", "css", "html" },
 	sync_install = false,
 	highlight = {
@@ -9,9 +12,6 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		disable = {},
 	},
-	-- autotag = {
-	-- 	enable = true,
-	-- },
 })
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
