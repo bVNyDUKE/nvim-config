@@ -100,18 +100,6 @@ lsp.configure("ts_ls", {
 	},
 })
 
-lsp.configure("denols", {
-	root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
-})
-
-lsp.configure("svelte", {
-	settings = {
-		Svelte = {
-			["enable-ts-plugin"] = false,
-		},
-	},
-})
-
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
 	local state = "Enabled"
@@ -195,8 +183,11 @@ null_ls.setup({
 		}),
 		null_ls.builtins.formatting.phpcsfixer,
 		null_ls.builtins.formatting.prettier.with({
-			disabled_filetypes = { "vue" },
-			extra_filetypes = { "astro", "svelte" },
+			condition = function(utils)
+				return utils.root_has_file({ ".prettierrc.json" })
+			end,
+			prefer_local = "node_modules/.bin",
+			extra_filetypes = { "astro", "svelte", "vue" },
 		}),
 		null_ls.builtins.formatting.rustfmt,
 		null_ls.builtins.formatting.stylua,
