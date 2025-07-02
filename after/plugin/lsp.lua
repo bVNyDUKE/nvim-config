@@ -52,7 +52,7 @@ lsp.configure("lua_ls", {
 			workspace = {
 				library = vim.api.nvim_get_runtime_file("", true),
 				checkThirdParty = false,
-				ignoreDir = {".git", "plugged"},
+				ignoreDir = { ".git", "plugged" },
 			},
 		},
 	},
@@ -131,7 +131,7 @@ lsp.on_attach(function(_, bufnr)
 	map("gr", Snacks.picker.lsp_references)
 	map("gd", Snacks.picker.lsp_definitions)
 	map("<leader>ds", Snacks.picker.lsp_symbols)
-	map("<leader>ds", Snacks.picker.lsp_workspace_symbols)
+	map("<leader>ws", Snacks.picker.lsp_workspace_symbols)
 	map("<leader>i", toggle_inlay_hints)
 end)
 
