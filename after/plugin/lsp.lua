@@ -1,4 +1,4 @@
-require("lspconfig")
+require("mason").setup()
 
 require("nvim-autopairs").setup({
 	fast_wrap = {},
@@ -10,36 +10,93 @@ vim.diagnostic.config({
 	},
 })
 
--- lsp.configure("intelephense", {
--- 	init_options = {
--- 		globalStoragePath = os.getenv("HOME") .. "/.local/share/intelephense",
--- 	},
--- })
+vim.lsp.config("lua_ls", {
+	cmd = { "lua-language-server" },
+	filetypes = { "lua" },
+	on_init = function(client)
+		if client.workspace_folders then
+			local path = client.workspace_folders[1].name
+			if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
+				return
+			end
+		end
 
--- lsp servers are installed here by mason
--- local lspPath = vim.fs.normalize(table.concat({ vim.fn.stdpath("data"), "mason" }, "/"))
+		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+			runtime = {
+				version = "LuaJIT",
+			},
+			workspace = {
+				ignoreDir = { ".git", "plugged" },
+				checkThirdParty = false,
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+		})
+	end,
+	settings = {
+		Lua = {},
+	},
+})
+vim.lsp.enable("lua_ls")
 
--- lsp.ensure_installed({
--- 	"ts_ls",
--- })
--- local js_inlay_hints = {
--- 	inlayHints = {
--- 		includeInlayEnumMemberValueHints = true,
--- 		includeInlayFunctionLikeReturnTypeHints = true,
--- 		includeInlayFunctionParameterTypeHints = true,
--- 		includeInlayParameterNameHints = "all",
--- 		includeInlayParameterNameHintsWhenArgumentMatchesName = false,
--- 		includeInlayPropertyDeclarationTypeHints = true,
--- 		includeInlayVariableTypeHints = true,
--- 	},
--- }
--- lsp.configure("ts_ls", {
--- 	root_dir = nvim_lsp.util.root_pattern("package.json"),
--- 	settings = {
--- 		typescript = js_inlay_hints,
--- 		javascipt = js_inlay_hints,
--- 	},
--- })
+vim.lsp.config("gopls", {
+	cmd = { "gopls" },
+	root_markers = { "go.mod" },
+	filetypes = { "go" },
+	settings = {
+		gopls = {
+			usePlaceholders = true,
+			codelenses = {
+				gc_details = true,
+				generate = true,
+				regenerate_cgo = true,
+				run_govulncheck = true,
+				test = true,
+				tidy = true,
+				upgrade_dependency = true,
+				vendor = true,
+				modernize = true,
+			},
+			experimentalPostfixCompletions = true,
+			directoryFilters = { "-.git", "-node_modules" },
+			semanticTokens = true,
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
+		},
+	},
+})
+vim.lsp.enable("gopls")
+
+vim.lsp.config("intelephense", {
+	init_options = {
+		globalStoragePath = os.getenv("HOME") .. "/.local/share/intelephense",
+	},
+})
+vim.lsp.enable("intelephense")
+
+local js_inlay_hints = {
+	inlayHints = {
+		includeInlayEnumMemberValueHints = true,
+		includeInlayFunctionLikeReturnTypeHints = true,
+		includeInlayFunctionParameterTypeHints = true,
+		includeInlayParameterNameHints = "all",
+		includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+		includeInlayPropertyDeclarationTypeHints = true,
+		includeInlayVariableTypeHints = true,
+	},
+}
+vim.lsp.config("ts_ls", {
+	settings = {
+		typescript = js_inlay_hints,
+		javascipt = js_inlay_hints,
+	},
+})
 
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
@@ -76,14 +133,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- lsp.setup()
-
 local null_ls = require("null-ls")
+local format = require("lsp-format").on_attach
 null_ls.setup({
-	on_attach = function(client, bufnr)
-		require("lsp-format").on_attach(client)
-	end,
-
+	on_attach = format,
 	-- Vue setup:
 	-- prettierd - only local
 	-- NextJs setup:

@@ -35,5 +35,6 @@ set.updatetime = 40
 set.completeopt = "menuone,noinsert,noselect"
 set.termguicolors = true
 set.pumheight = 10
+set.winborder = "rounded"
 
 vim.g.mapleader = " "
