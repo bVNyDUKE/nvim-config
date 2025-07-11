@@ -97,6 +97,25 @@ vim.lsp.config("ts_ls", {
 		javascipt = js_inlay_hints,
 	},
 })
+vim.lsp.enable("ts_ls")
+
+vim.lsp.config("eslint", {
+	cmd = { "vscode-eslint-language-server", "--stdio" },
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"javascript.jsx",
+		"typescript",
+		"typescriptreact",
+		"typescript.tsx",
+		"vue",
+		"svelte",
+		"astro",
+		"htmlangular",
+	},
+	root_markers = { "package.json" },
+})
+vim.lsp.enable("eslint")
 
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
