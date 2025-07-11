@@ -1,6 +1,16 @@
 local lsp = require("lsp-zero")
 local nvim_lsp = require("lspconfig")
 
+require("nvim-autopairs").setup({
+	fast_wrap = {},
+})
+
+vim.diagnostic.config({
+	jump = {
+		float = true,
+	},
+})
+
 lsp.preset("recommended")
 
 lsp.set_preferences({
@@ -21,21 +31,27 @@ lsp.configure("intelephense", {
 })
 
 lsp.configure("lua_ls", {
-	settings = {
-		Lua = {
+	on_init = function(client)
+		if client.workspace_folders then
+			local path = client.workspace_folders[1].name
+			if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
+				return
+			end
+		end
+
+		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
 			runtime = {
 				version = "LuaJIT",
-				path = vim.split(package.path, ";"),
-			},
-			diagnostics = {
-				globals = { "vim" },
 			},
 			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true),
-				checkThirdParty = false,
 				ignoreDir = { ".git", "plugged" },
+				checkThirdParty = false,
+				library = vim.api.nvim_get_runtime_file("", true),
 			},
-		},
+		})
+	end,
+	settings = {
+		Lua = {},
 	},
 })
 
@@ -112,11 +128,17 @@ end
 
 lsp.on_attach(function(_, bufnr)
 	lsp.default_keymaps({ bufnr = bufnr })
+
 	local map = function(keys, func)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false })
 	end
-	map("]g", vim.diagnostic.goto_next)
-	map("[g", vim.diagnostic.goto_prev)
+
+	map("]g", function()
+		vim.diagnostic.jump({ count = 1, float = true })
+	end)
+	map("[g", function()
+		vim.diagnostic.jump({ count = -1, float = true })
+	end)
 	map("<leader>ca", vim.lsp.buf.code_action)
 	map("<leader>vr", vim.lsp.buf.references)
 	map("gR", vim.lsp.buf.rename)
@@ -128,10 +150,6 @@ lsp.on_attach(function(_, bufnr)
 end)
 
 lsp.setup()
-
-require("nvim-autopairs").setup({
-	fast_wrap = {},
-})
 
 local null_ls = require("null-ls")
 local null_opts = lsp.build_options("null-ls", {})
@@ -152,19 +170,6 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.mypy.with({
 			extra_args = { "--python-executable", "./env/bin/python" },
 		}),
-		null_ls.builtins.diagnostics.ruff,
-		null_ls.builtins.diagnostics.eslint.with({
-			prefer_local = "node_modules/.bin",
-			extra_filetypes = { "astro", "svelte" },
-		}),
-		null_ls.builtins.formatting.eslint.with({
-			prefer_local = "node_modules/.bin",
-			extra_filetypes = { "astro", "svelte" },
-		}),
-		null_ls.builtins.code_actions.eslint.with({
-			prefer_local = "node_modules/.bin",
-			extra_filetypes = { "astro", "svelte" },
-		}),
 		null_ls.builtins.formatting.black.with({
 			only_local = "env/bin",
 		}),
@@ -184,22 +189,13 @@ null_ls.setup({
 		null_ls.builtins.formatting.phpcsfixer,
 		null_ls.builtins.formatting.prettier.with({
 			condition = function(utils)
-				return utils.root_has_file({ ".prettierrc.json" })
+				return utils.root_has_file({ ".prettierrc.json", ".prettierrc" })
 			end,
 			prefer_local = "node_modules/.bin",
 			extra_filetypes = { "astro", "svelte", "vue" },
 		}),
-		null_ls.builtins.formatting.rustfmt,
 		null_ls.builtins.formatting.stylua,
 	},
 })
 
 vim.cmd([[command! -range=% Pfmt <line1>,<line2>!npx prettier --stdin-filepath %]])
-
--- Turn off semantic highlighting
--- vim.api.nvim_create_autocmd('LspAttach', {
---   callback = function(args)
---     local client = vim.lsp.get_client_by_id(args.data.client_id)
---     client.server_capabilities.semanticTokensProvider = nil
---   end
--- })

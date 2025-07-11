@@ -20,7 +20,7 @@ Plug("williamboman/mason-lspconfig.nvim")
 
 -- Formatting
 Plug("lukas-reineke/lsp-format.nvim")
-Plug("jose-elias-alvarez/null-ls.nvim")
+Plug("nvimtools/none-ls.nvim")
 
 -- Autocompletion
 Plug("hrsh7th/nvim-cmp")
