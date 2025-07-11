@@ -21,12 +21,8 @@ Plug("lukas-reineke/lsp-format.nvim")
 Plug("nvimtools/none-ls.nvim")
 
 -- Autocompletion
-Plug("hrsh7th/nvim-cmp")
-Plug("hrsh7th/cmp-buffer")
-Plug("hrsh7th/cmp-path")
-Plug("saadparwaiz1/cmp_luasnip")
-Plug("hrsh7th/cmp-nvim-lsp")
-Plug("hrsh7th/cmp-nvim-lua")
+Plug("echasnovski/mini.icons", { branch = "stable" })
+Plug("echasnovski/mini.completion", { branch = "stable" })
 
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-lualine/lualine.nvim")

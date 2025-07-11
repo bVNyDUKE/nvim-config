@@ -1,3 +1,4 @@
+require("lspconfig")
 require("mason").setup()
 
 require("nvim-autopairs").setup({
