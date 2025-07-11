@@ -106,6 +106,8 @@ vim.lsp.config("ts_ls", {
 })
 vim.lsp.enable("ts_ls")
 
+vim.lsp.enable("tailwindcss")
+
 vim.lsp.config("eslint", {
 	cmd = { "vscode-eslint-language-server", "--stdio" },
 	filetypes = {
@@ -135,8 +137,15 @@ local toggle_inlay_hints = function()
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		local bufnr = args.buf
+	callback = function(ev)
+		local bufnr = ev.buf
+
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client then
+			if client:supports_method("textDocument/completion", bufnr) then
+				vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+			end
+		end
 
 		local map = function(keys, func)
 			vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false })
