@@ -73,13 +73,6 @@ vim.lsp.config("gopls", {
 })
 vim.lsp.enable("gopls")
 
-vim.lsp.config("intelephense", {
-	init_options = {
-		globalStoragePath = os.getenv("HOME") .. "/.local/share/intelephense",
-	},
-})
-vim.lsp.enable("intelephense")
-
 local js_inlay_hints = {
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
@@ -92,6 +85,20 @@ local js_inlay_hints = {
 	},
 }
 vim.lsp.config("ts_ls", {
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"javascript.jsx",
+		"typescript",
+		"typescriptreact",
+		"typescript.tsx",
+		"vue",
+		"svelte",
+		"astro",
+		"htmlangular",
+	},
+	root_markers = { "package.json" },
 	settings = {
 		typescript = js_inlay_hints,
 		javascipt = js_inlay_hints,
@@ -153,9 +160,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local null_ls = require("null-ls")
-local format = require("lsp-format").on_attach
+local format = require("lsp-format")
 null_ls.setup({
-	on_attach = format,
+	on_attach = format.on_attach,
 	-- Vue setup:
 	-- prettierd - only local
 	-- NextJs setup:
