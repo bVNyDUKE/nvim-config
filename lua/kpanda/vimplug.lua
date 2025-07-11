@@ -14,6 +14,7 @@ Plug("windwp/nvim-autopairs")
 
 -- LSP Support
 Plug("williamboman/mason.nvim")
+Plug("neovim/nvim-lspconfig")
 
 -- Formatting
 Plug("lukas-reineke/lsp-format.nvim")
