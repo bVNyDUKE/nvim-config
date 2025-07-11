@@ -100,18 +100,6 @@ lsp.configure("ts_ls", {
 	},
 })
 
-lsp.configure("denols", {
-	root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
-})
-
-lsp.configure("svelte", {
-	settings = {
-		Svelte = {
-			["enable-ts-plugin"] = false,
-		},
-	},
-})
-
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
 	local state = "Enabled"
@@ -133,10 +121,10 @@ lsp.on_attach(function(_, bufnr)
 	map("<leader>vr", vim.lsp.buf.references)
 	map("gR", vim.lsp.buf.rename)
 	map("<leader>i", toggle_inlay_hints)
-	map("gr", require("telescope.builtin").lsp_references)
-	map("gd", require("telescope.builtin").lsp_definitions)
-	map("<leader>ds", require("telescope.builtin").lsp_document_symbols)
-	map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols)
+	map("gr", Snacks.picker.lsp_references)
+	map("gd", Snacks.picker.lsp_definitions)
+	map("<leader>ds", Snacks.picker.lsp_symbols)
+	map("<leader>ws", Snacks.picker.lsp_workspace_symbols)
 end)
 
 lsp.setup()
@@ -195,8 +183,11 @@ null_ls.setup({
 		}),
 		null_ls.builtins.formatting.phpcsfixer,
 		null_ls.builtins.formatting.prettier.with({
-			disabled_filetypes = { "vue" },
-			extra_filetypes = { "astro", "svelte" },
+			condition = function(utils)
+				return utils.root_has_file({ ".prettierrc.json" })
+			end,
+			prefer_local = "node_modules/.bin",
+			extra_filetypes = { "astro", "svelte", "vue" },
 		}),
 		null_ls.builtins.formatting.rustfmt,
 		null_ls.builtins.formatting.stylua,

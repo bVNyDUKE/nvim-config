@@ -33,14 +33,13 @@ Plug("hrsh7th/cmp-nvim-lua")
 Plug("VonHeikemen/lsp-zero.nvim", { branch = "v1.x" })
 
 Plug("nvim-lua/plenary.nvim")
-Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-lualine/lualine.nvim")
+
+Plug("folke/snacks.nvim")
 
 Plug("lewis6991/gitsigns.nvim")
 
 Plug("kyazdani42/nvim-web-devicons")
-Plug("kyazdani42/nvim-tree.lua")
--- Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
