@@ -1,4 +1,3 @@
-require("lspconfig")
 require("mason").setup()
 
 require("nvim-autopairs").setup({
@@ -40,35 +39,10 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable("lua_ls")
 
 vim.lsp.config("gopls", {
-	cmd = { "gopls" },
-	root_markers = { "go.mod" },
-	filetypes = { "go" },
 	settings = {
 		gopls = {
-			usePlaceholders = true,
-			codelenses = {
-				gc_details = true,
-				generate = true,
-				regenerate_cgo = true,
-				run_govulncheck = true,
-				test = true,
-				tidy = true,
-				upgrade_dependency = true,
-				vendor = true,
-				modernize = true,
-			},
-			experimentalPostfixCompletions = true,
-			directoryFilters = { "-.git", "-node_modules" },
+			directoryFilters = { "-**/.git", "-**/node_modules" },
 			semanticTokens = true,
-			hints = {
-				assignVariableTypes = true,
-				compositeLiteralFields = true,
-				compositeLiteralTypes = true,
-				constantValues = true,
-				functionTypeParameters = true,
-				parameterNames = true,
-				rangeVariableTypes = true,
-			},
 		},
 	},
 })
@@ -86,20 +60,6 @@ local js_inlay_hints = {
 	},
 }
 vim.lsp.config("ts_ls", {
-	cmd = { "typescript-language-server", "--stdio" },
-	filetypes = {
-		"javascript",
-		"javascriptreact",
-		"javascript.jsx",
-		"typescript",
-		"typescriptreact",
-		"typescript.tsx",
-		"vue",
-		"svelte",
-		"astro",
-		"htmlangular",
-	},
-	root_markers = { "package.json" },
 	settings = {
 		typescript = js_inlay_hints,
 		javascipt = js_inlay_hints,
@@ -110,19 +70,6 @@ vim.lsp.enable("ts_ls")
 vim.lsp.enable("tailwindcss")
 
 vim.lsp.config("eslint", {
-	cmd = { "vscode-eslint-language-server", "--stdio" },
-	filetypes = {
-		"javascript",
-		"javascriptreact",
-		"javascript.jsx",
-		"typescript",
-		"typescriptreact",
-		"typescript.tsx",
-		"vue",
-		"svelte",
-		"astro",
-		"htmlangular",
-	},
 	root_markers = { "package.json" },
 })
 vim.lsp.enable("eslint")
@@ -140,13 +87,6 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local bufnr = ev.buf
-
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client then
-			if client:supports_method("textDocument/completion", bufnr) then
-				vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-			end
-		end
 
 		local map = function(keys, func)
 			vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false })

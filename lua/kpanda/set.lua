@@ -32,7 +32,6 @@ set.encoding = "UTF-8"
 set.scrolloff = 8
 set.signcolumn = "yes"
 set.updatetime = 40
-set.completeopt = "menuone,longest,noselect"
 set.termguicolors = true
 set.pumheight = 10
 set.winborder = "rounded"

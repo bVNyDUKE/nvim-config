@@ -21,7 +21,6 @@ Plug("lukas-reineke/lsp-format.nvim")
 Plug("nvimtools/none-ls.nvim")
 
 -- Autocompletion
-Plug("echasnovski/mini.icons", { branch = "stable" })
 Plug("echasnovski/mini.completion", { branch = "stable" })
 
 Plug("nvim-lua/plenary.nvim")
