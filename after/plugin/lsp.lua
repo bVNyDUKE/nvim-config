@@ -66,13 +66,12 @@ vim.lsp.config("ts_ls", {
 	},
 })
 vim.lsp.enable("ts_ls")
-
-vim.lsp.enable("tailwindcss")
-
-vim.lsp.config("eslint", {
-	root_markers = { "package.json" },
-})
+vim.lsp.enable("html")
+vim.lsp.enable("cssls")
+vim.lsp.enable("astro")
 vim.lsp.enable("eslint")
+vim.lsp.enable("tailwindcss")
+vim.lsp.enable("dockerls")
 
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
