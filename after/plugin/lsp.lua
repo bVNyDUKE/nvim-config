@@ -87,6 +87,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local bufnr = ev.buf
 
+		-- completions only if we have LSP
+		vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+
 		local map = function(keys, func)
 			vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false })
 		end
@@ -117,6 +120,7 @@ null_ls.setup({
 	-- NextJs setup:
 	-- prettierd - default
 	sources = {
+		null_ls.builtins.completion.spell,
 		null_ls.builtins.formatting.gofumpt,
 		null_ls.builtins.diagnostics.golangci_lint,
 		null_ls.builtins.diagnostics.mypy.with({
