@@ -43,29 +43,98 @@ vim.lsp.config("gopls", {
 		gopls = {
 			directoryFilters = { "-**/.git", "-**/node_modules" },
 			semanticTokens = true,
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				ignoredError = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
 		},
 	},
 })
 vim.lsp.enable("gopls")
 
+-- Vue Settings
+local vue_language_server_path = vim.fn.stdpath("data")
+	.. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+
+local vue_plugin = {
+	name = "@vue/typescript-plugin",
+	location = vue_language_server_path,
+	languages = { "vue" },
+	configNamespace = "typescript",
+}
+
 local js_inlay_hints = {
 	inlayHints = {
-		includeInlayEnumMemberValueHints = true,
-		includeInlayFunctionLikeReturnTypeHints = true,
-		includeInlayFunctionParameterTypeHints = true,
-		includeInlayParameterNameHints = "all",
-		includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-		includeInlayPropertyDeclarationTypeHints = true,
-		includeInlayVariableTypeHints = true,
+		enumMemberValues = {
+			enabled = "all",
+		},
+		functionLikeReturnTypes = {
+			enabled = "all",
+		},
+		parameterNames = {
+			enabled = "all",
+		},
+		propertyDeclarationTypes = {
+			enabled = true,
+		},
+		variableTypes = {
+			enabled = true,
+		},
 	},
 }
-vim.lsp.config("ts_ls", {
+local vtsls_config = {
 	settings = {
 		typescript = js_inlay_hints,
-		javascipt = js_inlay_hints,
+		javascript = js_inlay_hints,
+		vtsls = {
+			tsserver = {
+				globalPlugins = {
+					vue_plugin,
+				},
+			},
+		},
 	},
-})
-vim.lsp.enable("ts_ls")
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+}
+
+local vue_ls_config = {
+	on_init = function(client)
+		client.handlers["tsserver/request"] = function(_, result, context)
+			local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+			if #clients == 0 then
+				vim.notify(
+					"Could not find `vtsls` lsp client, `vue_ls` would not work without it.",
+					vim.log.levels.ERROR
+				)
+				return
+			end
+			local ts_client = clients[1]
+
+			local param = unpack(result)
+			local id, command, payload = unpack(param)
+			ts_client:exec_cmd({
+				title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+				command = "typescript.tsserverRequest",
+				arguments = {
+					command,
+					payload,
+				},
+			}, { bufnr = context.bufnr }, function(_, r)
+				local response_data = { { id, r.body } }
+				client:notify("tsserver/response", response_data)
+			end)
+		end
+	end,
+}
+
+vim.lsp.config("vtsls", vtsls_config)
+vim.lsp.config("vue_ls", vue_ls_config)
+vim.lsp.enable({ "vtsls", "vue_ls" })
 vim.lsp.enable("html")
 vim.lsp.enable("cssls")
 vim.lsp.enable("astro")
@@ -74,7 +143,7 @@ vim.lsp.enable("tailwindcss")
 vim.lsp.enable("dockerls")
 
 local toggle_inlay_hints = function()
-	local enabled = vim.lsp.inlay_hint.is_enabled({ nil })
+	local enabled = vim.lsp.inlay_hint.is_enabled()
 	local state = "Enabled"
 	if enabled then
 		state = "Disabled"

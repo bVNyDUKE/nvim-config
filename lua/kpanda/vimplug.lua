@@ -13,7 +13,7 @@ Plug("nvim-treesitter/nvim-treesitter", {
 Plug("windwp/nvim-autopairs")
 
 -- LSP Support
-Plug("williamboman/mason.nvim")
+Plug("mason-org/mason.nvim")
 Plug("neovim/nvim-lspconfig")
 
 -- Formatting
