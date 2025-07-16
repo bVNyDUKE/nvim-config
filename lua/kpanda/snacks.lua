@@ -4,13 +4,14 @@ Snacks.setup(
 	-- @type snacks.Config
 	{
 		picker = {
+			matcher = {
+				fuzzy = false,
+			},
 			enabled = true,
-			layout = "ivy",
 			sources = {
 				explorer = {
 					layout = {
 						preset = "sidebar",
-						preview = false,
 						layout = {
 							position = "right",
 						},
