@@ -4,7 +4,12 @@ Snacks.setup(
 	{
 		picker = {
 			enabled = true,
-			layout = "ivy",
+			matcher = {
+				fuzzy = false,
+			},
+			layout = {
+				cycle = true,
+			},
 			sources = {
 				explorer = {
 					layout = {
