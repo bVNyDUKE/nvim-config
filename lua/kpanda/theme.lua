@@ -34,10 +34,10 @@ require("onedark").setup({
 		bg0 = "#f1efee",
 	},
 })
-
-local time = os.date("*t")
-if (time.hour > 6) and (time.hour < 18) then
-	vim.cmd("colorscheme onedark")
-else
-	vim.cmd("colorscheme kanagawa")
-end
+vim.cmd("colorscheme kanagawa")
+-- local time = os.date("*t")
+-- if (time.hour > 6) and (time.hour < 18) then
+-- 	vim.cmd("colorscheme onedark")
+-- else
+-- 	vim.cmd("colorscheme kanagawa")
+-- end
