@@ -21,6 +21,7 @@ Plug("lukas-reineke/lsp-format.nvim")
 Plug("nvimtools/none-ls.nvim")
 
 -- Autocompletion
+Plug("echasnovski/mini.icons", { branch = "stable" })
 Plug("echasnovski/mini.completion", { branch = "stable" })
 
 Plug("nvim-lua/plenary.nvim")
@@ -29,8 +30,6 @@ Plug("nvim-lualine/lualine.nvim")
 Plug("folke/snacks.nvim")
 
 Plug("lewis6991/gitsigns.nvim")
-
-Plug("kyazdani42/nvim-web-devicons")
 
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
