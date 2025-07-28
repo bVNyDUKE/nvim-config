@@ -33,6 +33,5 @@ Plug("lewis6991/gitsigns.nvim")
 
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
-Plug("tpope/vim-sleuth")
 
 vim.call("plug#end")
