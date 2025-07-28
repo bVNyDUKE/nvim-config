@@ -1,9 +1,5 @@
 require("mason").setup()
 
-require("nvim-autopairs").setup({
-	fast_wrap = {},
-})
-
 vim.diagnostic.config({
 	jump = {
 		float = true,
