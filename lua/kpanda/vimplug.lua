@@ -45,7 +45,7 @@ Plug("kyazdani42/nvim-tree.lua")
 
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
-Plug("tpope/vim-sleuth")
+-- Plug("tpope/vim-sleuth")
 
 -- Color preview
 Plug("catgoose/nvim-colorizer.lua")
