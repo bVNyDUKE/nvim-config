@@ -155,13 +155,15 @@ null_ls.setup({
 	-- NextJs setup:
 	-- prettierd - default
 	sources = {
-		null_ls.builtins.diagnostics.eslint,
+		null_ls.builtins.diagnostics.eslint.with({
+			only_local = "node_modules/.bin",
+		}),
 		null_ls.builtins.code_actions.eslint.with({
+			only_local = "node_modules/.bin",
 			env = {
 				ESLINT_USE_FLAT_CONFIG = false,
 			},
 		}),
-		null_ls.builtins.formatting.eslint,
 		null_ls.builtins.formatting.gofmt,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.prettier.with({
