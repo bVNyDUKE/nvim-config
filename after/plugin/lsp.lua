@@ -205,7 +205,7 @@ null_ls.setup({
 				return utils.root_has_file({ ".prettierrc.json", ".prettierrc" })
 			end,
 			prefer_local = "node_modules/.bin",
-			extra_filetypes = { "astro", "svelte", "vue" },
+			extra_filetypes = { "astro", "vue" },
 		}),
 		null_ls.builtins.formatting.stylua,
 	},
