@@ -32,7 +32,6 @@ vim.lsp.config("lua_ls", {
 		Lua = {},
 	},
 })
-vim.lsp.enable("lua_ls")
 
 vim.lsp.config("gopls", {
 	settings = {
@@ -51,7 +50,6 @@ vim.lsp.config("gopls", {
 		},
 	},
 })
-vim.lsp.enable("gopls")
 
 -- Vue Settings
 local vue_language_server_path = vim.fn.stdpath("data")
@@ -130,13 +128,7 @@ local vue_ls_config = {
 
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
-vim.lsp.enable({ "vtsls", "vue_ls" })
-vim.lsp.enable("html")
-vim.lsp.enable("cssls")
-vim.lsp.enable("astro")
-vim.lsp.enable("eslint")
-vim.lsp.enable("tailwindcss")
-vim.lsp.enable("dockerls")
+vim.lsp.enable({ "lua_ls", "gopls", "vtsls", "vue_ls", "html", "cssls", "astro", "eslint", "tailwindcss", "dockerls" })
 
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled()
