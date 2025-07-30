@@ -34,6 +34,7 @@ set.signcolumn = "yes"
 set.updatetime = 40
 set.termguicolors = true
 set.pumheight = 10
+set.pumblend = 10 -- make builtin completion menus slightly transparent
 set.winborder = "rounded"
 
 vim.g.mapleader = " "
