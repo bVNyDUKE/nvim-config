@@ -7,14 +7,17 @@ Snacks.setup(
 			matcher = {
 				fuzzy = false,
 			},
-			layout = {
-				cycle = true,
-			},
 			sources = {
+				files = {
+					hidden = true,
+					include = { ".gitignore", ".env", ".env.local", ".skaffold.env" },
+				},
 				explorer = {
+					hidden = true,
+					ignored = true,
+					exclude = {},
 					layout = {
 						preset = "sidebar",
-						preview = false,
 						layout = {
 							position = "right",
 						},
