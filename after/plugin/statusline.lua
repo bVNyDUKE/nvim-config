@@ -66,7 +66,6 @@ function cmp.diagnostic_status()
 end
 
 local statusline = {
-	'%{%v:lua._statusline_component("mode_name")%} ',
 	"%{FugitiveStatusline()} ",
 	'%{%v:lua._statusline_component("diagnostic_status")%} ',
 	"%t ",
@@ -77,4 +76,3 @@ local statusline = {
 }
 
 vim.o.statusline = table.concat(statusline, "")
-vim.opt.showmode = false
