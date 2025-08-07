@@ -36,5 +36,6 @@ set.termguicolors = true
 set.pumheight = 10
 set.pumblend = 10 -- make builtin completion menus slightly transparent
 set.winborder = "rounded"
+set.list = true -- show whitespace and control chars
 
 vim.g.mapleader = " "

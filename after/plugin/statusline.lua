@@ -109,4 +109,5 @@ local statusline = {
 	"%{&filetype} ",
 }
 
+vim.o.laststatus = 3
 vim.o.statusline = table.concat(statusline, "")
