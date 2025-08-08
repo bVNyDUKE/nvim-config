@@ -58,6 +58,19 @@ function cmp.git_status()
 	})
 end
 
+--- @param levels {color: function, symbol: string, level: vim.diagnostic.Severity}[]
+--- @return string[]
+local getLevels = function(levels)
+	local res = {}
+	for _, value in ipairs(levels) do
+		local count = #vim.diagnostic.get(0, { severity = value.level })
+		if count > 0 then
+			table.insert(res, value.color(table.concat({ " ", value.symbol, ":", count, " " })))
+		end
+	end
+	return res
+end
+
 function cmp.diagnostic_status()
 	local ok = "[OK]"
 
@@ -70,19 +83,6 @@ function cmp.diagnostic_status()
 
 	if ignore[mode] then
 		return ok
-	end
-
-	--- @param levels {color: function, symbol: string, level: vim.diagnostic.Severity}[]
-	--- @return string[]
-	local getLevels = function(levels)
-		local res = {}
-		for _, value in ipairs(levels) do
-			local count = #vim.diagnostic.get(0, { severity = value.level })
-			if count > 0 then
-				table.insert(res, value.color(table.concat({ " ", value.symbol, ":", count, " " })))
-			end
-		end
-		return res
 	end
 
 	local levels = vim.diagnostic.severity
