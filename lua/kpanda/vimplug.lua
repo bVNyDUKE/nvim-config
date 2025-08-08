@@ -1,6 +1,6 @@
 local Plug = vim.fn["plug#"]
 
-vim.call("plug#begin", "/home/kpanda/.config/nvim/plugged")
+vim.call("plug#begin", "~/.config/nvim/plugged")
 --Themes
 Plug("rebelot/kanagawa.nvim")
 
@@ -25,7 +25,6 @@ Plug("echasnovski/mini.icons", { branch = "stable" })
 Plug("echasnovski/mini.completion", { branch = "stable" })
 
 Plug("nvim-lua/plenary.nvim")
-Plug("nvim-lualine/lualine.nvim")
 
 Plug("folke/snacks.nvim")
 
