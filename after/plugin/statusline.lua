@@ -106,6 +106,7 @@ local statusline = {
 	"%r",
 	"%m",
 	"%=",
+	"%L ",
 	"%{&filetype} ",
 }
 
