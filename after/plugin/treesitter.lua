@@ -21,6 +21,9 @@ require("nvim-treesitter.configs").setup({
 		"phpdoc",
 		"html",
 		"php",
+		"java",
+		"javadoc",
+		"jsdoc",
 	},
 	sync_install = false,
 	highlight = {
