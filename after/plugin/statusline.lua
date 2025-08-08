@@ -100,12 +100,12 @@ function cmp.diagnostic_status()
 end
 
 local statusline = {
-	'%{%v:lua._statusline_component("diagnostic_status")%} ',
 	'%{%v:lua._statusline_component("git_status")%} ',
 	"%f ",
 	"%r",
 	"%m",
 	"%=",
+	'%{%v:lua._statusline_component("diagnostic_status")%} ',
 	"%L ",
 	"%{&filetype} ",
 }
