@@ -6,6 +6,30 @@ vim.diagnostic.config({
 	},
 })
 
+vim.lsp.config("jdtls", {
+	settings = {
+		redhat = {
+			telemetry = {
+				enabled = false,
+			},
+		},
+		java = {
+			import = {
+				gradle = {
+					enabled = false,
+				},
+			},
+			jdt = {
+				ls = {
+					androidSupport = {
+						enabled = false,
+					},
+				},
+			},
+		},
+	},
+})
+
 vim.lsp.config("lua_ls", {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
@@ -128,7 +152,19 @@ local vue_ls_config = {
 
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
-vim.lsp.enable({ "lua_ls", "gopls", "vtsls", "vue_ls", "html", "cssls", "astro", "eslint", "tailwindcss", "dockerls" })
+vim.lsp.enable({
+	"lua_ls",
+	"gopls",
+	"vtsls",
+	"vue_ls",
+	"html",
+	"cssls",
+	"astro",
+	"eslint",
+	"tailwindcss",
+	"dockerls",
+	"jdtls",
+})
 
 local toggle_inlay_hints = function()
 	local enabled = vim.lsp.inlay_hint.is_enabled()
@@ -163,6 +199,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("<leader>i", toggle_inlay_hints)
 		map("gr", Snacks.picker.lsp_references)
 		map("gd", Snacks.picker.lsp_definitions)
+		map("gi", Snacks.picker.lsp_implementations)
 		map("<leader>ds", Snacks.picker.lsp_symbols)
 		map("<leader>ws", Snacks.picker.lsp_workspace_symbols)
 	end,
