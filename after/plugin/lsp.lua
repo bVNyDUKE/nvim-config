@@ -57,11 +57,36 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+-- Formatting
+local format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local format_callback = function(client_name)
+	return function(client, bufnr)
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = format_augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = format_augroup,
+				buffer = bufnr,
+				callback = function()
+					vim.lsp.buf.format({
+						bufnr = bufnr,
+						async = false,
+						filter = function(c)
+							return c.name == client_name
+						end,
+					})
+				end,
+			})
+		end
+	end
+end
+
 vim.lsp.config("gopls", {
+	on_attach = format_callback("gopls"),
 	settings = {
 		gopls = {
 			directoryFilters = { "-**/.git", "-**/node_modules" },
 			semanticTokens = true,
+			gofumpt = true,
 			hints = {
 				assignVariableTypes = true,
 				compositeLiteralFields = true,
@@ -206,17 +231,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local null_ls = require("null-ls")
-local format = require("lsp-format")
 null_ls.setup({
-	on_attach = format.on_attach,
+	on_attach = format_callback("null-ls"),
 	-- Vue setup:
 	-- prettierd - only local
 	-- NextJs setup:
 	-- prettierd - default
 	sources = {
-		null_ls.builtins.completion.spell,
-		null_ls.builtins.formatting.gofumpt,
-		null_ls.builtins.diagnostics.golangci_lint,
 		null_ls.builtins.diagnostics.mypy.with({
 			extra_args = { "--python-executable", "./env/bin/python" },
 		}),
