@@ -17,7 +17,6 @@ Plug("mason-org/mason.nvim")
 Plug("neovim/nvim-lspconfig")
 
 -- Formatting
--- Plug("lukas-reineke/lsp-format.nvim")
 Plug("nvimtools/none-ls.nvim")
 
 -- Autocompletion
