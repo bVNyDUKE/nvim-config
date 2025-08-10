@@ -2,3 +2,5 @@ require("nvim-autopairs").setup({
 	check_ts = true,
 	fast_wrap = {},
 })
+
+require("nvim-ts-autotag").setup()
