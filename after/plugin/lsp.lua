@@ -189,6 +189,7 @@ vim.lsp.enable({
 	"tailwindcss",
 	"dockerls",
 	"jdtls",
+	"pyright",
 })
 
 local toggle_inlay_hints = function()
@@ -238,9 +239,9 @@ null_ls.setup({
 	-- NextJs setup:
 	-- prettierd - default
 	sources = {
-		null_ls.builtins.diagnostics.mypy.with({
-			extra_args = { "--python-executable", "./env/bin/python" },
-		}),
+		-- null_ls.builtins.diagnostics.mypy.with({
+		-- 	extra_args = { "--python-executable", "./env/bin/python" },
+		-- }),
 		null_ls.builtins.formatting.black.with({
 			only_local = "env/bin",
 		}),
