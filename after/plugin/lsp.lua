@@ -242,6 +242,7 @@ null_ls.setup({
 		-- null_ls.builtins.diagnostics.mypy.with({
 		-- 	extra_args = { "--python-executable", "./env/bin/python" },
 		-- }),
+		null_ls.builtins.completion.spell, --for json
 		null_ls.builtins.formatting.black.with({
 			only_local = "env/bin",
 		}),
