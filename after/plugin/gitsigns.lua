@@ -19,6 +19,7 @@ gs.setup({
 		map("n", "ghU", "<cmd>Gitsigns undo_stage_hunk<CR>")
 		map("n", "ghR", "<cmd>Gitsigns reset_buffer<CR>")
 		map("n", "ghp", "<cmd>Gitsigns preview_hunk<CR>")
+		map("n", "gbb", ":Gitsigns blame<CR>")
 		vim.keymap.set("n", "ghb", function()
 			gs.blame_line({ full = true })
 		end)
