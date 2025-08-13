@@ -36,7 +36,7 @@ vim.lsp.config("lua_ls", {
 	on_init = function(client)
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name
-			if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
+			if path ~= vim.fn.stdpath("config") then
 				return
 			end
 		end
@@ -48,7 +48,9 @@ vim.lsp.config("lua_ls", {
 			workspace = {
 				ignoreDir = { ".git", "plugged" },
 				checkThirdParty = false,
-				library = vim.api.nvim_get_runtime_file("", true),
+				library = vim.tbl_filter(function(d)
+					return not d:match(vim.fn.stdpath("config") .. "/?a?f?t?e?r")
+				end, vim.api.nvim_get_runtime_file("", true)),
 			},
 		})
 	end,
