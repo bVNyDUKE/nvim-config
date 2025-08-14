@@ -19,6 +19,7 @@ Plug("neovim/nvim-lspconfig")
 
 -- Formatting
 Plug("nvimtools/none-ls.nvim")
+Plug("stevearc/conform.nvim")
 
 -- Autocompletion
 Plug("echasnovski/mini.icons", { branch = "stable" })
