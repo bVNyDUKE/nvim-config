@@ -4,6 +4,7 @@ require("lualine").setup({
 		component_separators = "",
 		section_separators = "",
 		always_divide_middle = true,
+		always_show_tabline = false,
 		globalstatus = false,
 	},
 	sections = {
@@ -14,7 +15,7 @@ require("lualine").setup({
 			path = 1,
 		} },
 		lualine_x = { "diagnostics", "encoding", "filetype" },
-		lualine_y = { "lsp_status" },
+		lualine_y = {},
 		lualine_z = {},
 	},
 	inactive_sections = {
@@ -25,6 +26,13 @@ require("lualine").setup({
 		lualine_y = {},
 		lualine_z = {},
 	},
-	tabline = {},
+	tabline = {
+		lualine_a = { { "tabs", mode = 2 } },
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
+	},
 	extensions = {},
 })
