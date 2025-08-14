@@ -5,16 +5,23 @@ require("lualine").setup({
 		section_separators = "",
 		always_divide_middle = true,
 		always_show_tabline = false,
-		globalstatus = false,
+		globalstatus = true,
 	},
 	sections = {
-		lualine_a = { "mode" },
+		lualine_a = {},
 		lualine_b = { "branch", "diff" },
 		lualine_c = { {
 			"filename",
 			path = 1,
 		} },
-		lualine_x = { "diagnostics", "encoding", "filetype" },
+		lualine_x = {
+			{
+				"diagnostics",
+				symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
+			},
+			"encoding",
+			{ "filetype", icon_only = true },
+		},
 		lualine_y = {},
 		lualine_z = {},
 	},
