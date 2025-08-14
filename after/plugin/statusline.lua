@@ -95,14 +95,14 @@ local statusline = {
 }
 
 --- Redraw statusline on WinEnter BufEnter events
-vim.api.nvim_exec2(
-	[[
-    augroup Statusline
-    au!
-    au WinEnter,BufEnter * redrawstatus
-    augroup END
-]],
-	{}
-)
+-- vim.api.nvim_exec2(
+-- 	[[
+--     augroup Statusline
+--     au!
+--     au WinEnter,BufEnter * redrawstatus
+--     augroup END
+-- ]],
+-- 	{}
+-- )
 
-vim.o.statusline = table.concat(statusline, "")
+-- vim.o.statusline = table.concat(statusline, "")

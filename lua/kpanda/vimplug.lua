@@ -27,7 +27,7 @@ Plug("echasnovski/mini.completion", { branch = "stable" })
 Plug("nvim-lua/plenary.nvim")
 
 Plug("folke/snacks.nvim")
-
+Plug("nvim-lualine/lualine.nvim")
 Plug("lewis6991/gitsigns.nvim")
 
 Plug("tpope/vim-fugitive")
