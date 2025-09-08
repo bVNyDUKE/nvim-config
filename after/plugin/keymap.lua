@@ -21,6 +21,6 @@ local mod = jit.os == "Linux" and "M" or "C"
 
 -- map Mod + Number to <Number>gt
 -- toggles the open tabs by numbers
-for i = 1, 6, 1 do
+for i = 1, 5, 1 do
 	vim.keymap.set("n", "<" .. mod .. "-" .. i .. ">", i .. "gt")
 end
