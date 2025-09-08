@@ -8,9 +8,20 @@ Snacks.setup(
 				fuzzy = false,
 			},
 			sources = {
+				buffers = {
+					supports_live = false,
+				},
 				files = {
 					hidden = true,
 					include = { ".gitignore", ".env", ".env.local", ".skaffold.env" },
+					matcher = {
+						fuzzy = false,
+					},
+				},
+				git_branches = {
+					matcher = {
+						fuzzy = false,
+					},
 				},
 				explorer = {
 					hidden = true,
@@ -33,7 +44,9 @@ vim.keymap.set("n", "<leader>fw", Snacks.picker.grep_word, { desc = "[F]ind [W]o
 vim.keymap.set("n", "<leader>fs", Snacks.picker.git_status, { desc = "[F]ind Git [S]tatus" })
 vim.keymap.set("n", "<leader>fd", Snacks.picker.diagnostics, { desc = "[F]ind [D]iagnostics" })
 vim.keymap.set("n", "<leader>fb", Snacks.picker.git_branches, { desc = "[F]ind Git [B]ranches" })
+vim.keymap.set("n", "<leader>fl", Snacks.picker.git_log, { desc = "[F]ind Git [L]og" })
 vim.keymap.set("n", "<leader>ff", Snacks.picker.buffers, { desc = "[F]ind Bu[f]fers" })
 vim.keymap.set("n", "<leader>fr", Snacks.picker.resume, { desc = "[F]ind [R]esume previous search" })
 vim.keymap.set("n", "<leader>fh", Snacks.picker.help, { desc = "[F]ind [H]elp" })
+vim.keymap.set("n", "<leader>fk", Snacks.picker.keymaps, { desc = "[F]ind [K]maps" })
 vim.keymap.set("n", "<leader>e", Snacks.picker.explorer, { desc = "[F]ind [E]xplore" })
