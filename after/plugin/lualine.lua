@@ -34,7 +34,7 @@ require("lualine").setup({
 		lualine_z = {},
 	},
 	tabline = {
-		lualine_a = { { "tabs", mode = 2 } },
+		lualine_a = { { "tabs", mode = 2, tab_max_length = 100, max_length = 10000 } },
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
