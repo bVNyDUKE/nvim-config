@@ -170,7 +170,7 @@ local vue_ls_config = {
 					payload,
 				},
 			}, { bufnr = context.bufnr }, function(_, r)
-				if r.body then
+				if r and r.body then
 					local response_data = { { id, r.body } }
 					client:notify("tsserver/response", response_data)
 				end
@@ -179,8 +179,17 @@ local vue_ls_config = {
 	end,
 }
 
+vim.lsp.config("cssls", {
+	settings = {
+		css = {
+			validate = false,
+		},
+	},
+})
+
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
+vim.lsp.config("tailwindcss", { root_markers = "tailwind.config.js" })
 vim.lsp.enable({
 	"lua_ls",
 	"gopls",
