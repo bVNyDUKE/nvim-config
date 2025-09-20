@@ -189,7 +189,7 @@ vim.lsp.config("cssls", {
 
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
-vim.lsp.config("tailwindcss", { root_markers = "tailwind.config.js" })
+vim.lsp.config("tailwindcss", { root_markers = { "tailwind.config.js" } })
 vim.lsp.enable({
 	"lua_ls",
 	"gopls",
