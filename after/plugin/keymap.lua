@@ -17,7 +17,7 @@ vim.keymap.del("n", "gri")
 vim.keymap.del("n", "gO")
 
 -- modifier key is either Alt or Ctrl
-local mod = jit.os == "Linux" and "M" or "C"
+local mod = "C"
 
 -- map Mod + Number to <Number>gt
 -- toggles the open tabs by numbers
