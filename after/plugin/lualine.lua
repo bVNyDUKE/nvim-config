@@ -5,7 +5,6 @@ require("lualine").setup({
 		section_separators = "",
 		always_divide_middle = true,
 		always_show_tabline = false,
-		globalstatus = true,
 	},
 	sections = {
 		lualine_a = {},
