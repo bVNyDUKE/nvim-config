@@ -1,9 +1,15 @@
-require("snacks")
+local Snacks = require("snacks")
 Snacks.setup(
 	-- @type snacks.Config
 	{
 		picker = {
 			enabled = true,
+			layout = {
+				preset = "vertical",
+				layout = {
+					width = 0.7,
+				},
+			},
 			matcher = {
 				fuzzy = false,
 			},
@@ -31,6 +37,7 @@ Snacks.setup(
 						preset = "sidebar",
 						layout = {
 							position = "right",
+							width = 0.3,
 						},
 					},
 				},

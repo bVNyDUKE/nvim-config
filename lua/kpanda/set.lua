@@ -22,7 +22,8 @@ set.wrap = false
 set.hidden = true
 set.number = true -- add line numbers
 set.relativenumber = true -- relative line numbers
-set.wildmode = "list:longest,list:full" -- get bash-like tab completions
+-- set.wildmode = "list:longest,list:full" -- get bash-like tab completions
+set.wildmode = "longest:full,full" -- get bash-like tab completions
 set.wildignore:append({ "**/node_modules/**", "**/.git/**", "./plugged/**", "./tmp" })
 set.mouse = "a" -- enable mouse click
 set.clipboard = "unnamedplus" -- using system clipboard
@@ -40,3 +41,4 @@ set.winborder = "rounded"
 set.list = true -- show whitespace and control chars
 
 vim.g.mapleader = " "
+vim.g.netrw_banner = 0

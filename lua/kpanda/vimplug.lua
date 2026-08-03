@@ -8,6 +8,7 @@ Plug("nvim-treesitter/nvim-treesitter", {
 	["do"] = function()
 		vim.cmd(":TSUpdate")
 	end,
+	branch = "master",
 })
 
 Plug("windwp/nvim-autopairs")
