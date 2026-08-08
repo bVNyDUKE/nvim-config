@@ -139,6 +139,7 @@ vim.lsp.config("ts_ls", tsls_config)
 vim.lsp.config("tailwindcss", { root_markers = { "tailwind.config.js" } })
 vim.lsp.enable({
 	"rust_analyzer",
+	"eslint",
 	"lua_ls",
 	"ts_ls",
 	"gopls",
