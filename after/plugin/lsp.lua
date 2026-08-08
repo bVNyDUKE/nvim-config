@@ -59,31 +59,7 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
--- Formatting
-local format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local format_callback = function(client_name)
-	return function(client, bufnr)
-		if client:supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = format_augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = format_augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({
-						bufnr = bufnr,
-						async = false,
-						filter = function(c)
-							return c.name == client_name
-						end,
-					})
-				end,
-			})
-		end
-	end
-end
-
 vim.lsp.config("gopls", {
-	on_attach = format_callback("gopls"),
 	settings = {
 		gopls = {
 			directoryFilters = { "-**/.git", "-**/node_modules" },
