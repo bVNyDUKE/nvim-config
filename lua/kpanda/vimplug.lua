@@ -4,12 +4,7 @@ vim.call("plug#begin", "~/.config/nvim/plugged")
 --Themes
 Plug("rebelot/kanagawa.nvim")
 
-Plug("nvim-treesitter/nvim-treesitter", {
-	["do"] = function()
-		vim.cmd(":TSUpdate")
-	end,
-	branch = "master",
-})
+Plug("nvim-treesitter/nvim-treesitter", { branch = "main" })
 
 Plug("windwp/nvim-autopairs")
 Plug("windwp/nvim-ts-autotag")
