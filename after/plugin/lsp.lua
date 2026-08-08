@@ -2,7 +2,9 @@ require("mason").setup()
 
 vim.diagnostic.config({
 	jump = {
-		float = true,
+		on_jump = function()
+			vim.diagnostic.open_float()
+		end,
 	},
 })
 
@@ -61,7 +63,7 @@ vim.lsp.config("lua_ls", {
 local format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local format_callback = function(client_name)
 	return function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
+		if client:supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({ group = format_augroup, buffer = bufnr })
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = format_augroup,
