@@ -24,3 +24,10 @@ local mod = jit.os == "Linux" and "M" or "C"
 for i = 1, 5, 1 do
 	vim.keymap.set("n", "<" .. mod .. "-" .. i .. ">", i .. "gt")
 end
+
+vim.keymap.set(
+	"n",
+	"<leader>lt",
+	"<cmd>lua require('kpanda.commands').apply_all_tailwind_actions_buffer()<CR>",
+	{ noremap = true, silent = true, desc = "Fix all Tailwind canonical classes (buffer)" }
+)

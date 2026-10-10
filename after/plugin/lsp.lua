@@ -48,9 +48,9 @@ vim.lsp.config("lua_ls", {
 			workspace = {
 				ignoreDir = { ".git", "plugged" },
 				checkThirdParty = false,
-				library = vim.tbl_filter(function(d)
-					return not d:match(vim.fn.stdpath("config") .. "/?a?f?t?e?r")
-				end, vim.api.nvim_get_runtime_file("", true)),
+				library = {
+					vim.env.VIMRUNTIME,
+				},
 			},
 		})
 	end,
@@ -151,6 +151,13 @@ vim.lsp.config("vtsls", {
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 })
 vim.lsp.config("tailwindcss", { filetypes = { "vue" } })
+vim.lsp.config("oxlint", {
+	cmd = function(dispatchers, config)
+		local cmd = vim.fs.joinpath(config.root_dir, "node_modules/.bin/oxlint")
+		return vim.lsp.rpc.start({ cmd, "--lsp" }, dispatchers)
+	end,
+	root_markers = { ".oxlintrc.json" },
+})
 vim.lsp.enable({
 	"lua_ls",
 	"gopls",
@@ -163,6 +170,7 @@ vim.lsp.enable({
 	"dockerls",
 	"jdtls",
 	"pyright",
+	"oxlint",
 })
 
 local toggle_inlay_hints = function()

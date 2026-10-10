@@ -4,9 +4,6 @@ Snacks.setup(
 	{
 		picker = {
 			enabled = true,
-			matcher = {
-				fuzzy = false,
-			},
 			sources = {
 				buffers = {
 					supports_live = false,
@@ -21,6 +18,21 @@ Snacks.setup(
 				git_branches = {
 					matcher = {
 						fuzzy = false,
+					},
+					format = function(item, picker)
+						local ret = {}
+						-- branch name — no fixed width, let it fill the rest
+						ret[#ret + 1] = {
+							item.branch or item.text or "",
+							item.current and "SnacksPickerGitBranchCurrent" or "SnacksPickerLabel",
+						}
+						return ret
+					end,
+					layout = {
+						preset = "ivy_split",
+						layout = {
+							width = 0.9,
+						},
 					},
 				},
 				explorer = {
