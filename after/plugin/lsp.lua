@@ -73,12 +73,26 @@ local js_inlay_hints = {
 		},
 	},
 }
-local tsls_config = {
+vim.lsp.config("vtsls", {
 	settings = {
-		["js/ts"] = js_inlay_hints,
+		typescript = js_inlay_hints,
+		javascript = js_inlay_hints,
+		vtsls = {
+			tsserver = {
+				globalPlugins = {
+					{
+						name = "@vue/typescript-plugin",
+						location = vim.fn.stdpath("data")
+							.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+						languages = { "vue" },
+						configNamespace = "typescript",
+					},
+				},
+			},
+		},
 	},
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-}
+})
 
 vim.lsp.config("cssls", {
 	settings = {
@@ -88,15 +102,12 @@ vim.lsp.config("cssls", {
 	},
 })
 
--- vim.lsp.config("vtsls", tsls_config)
-vim.lsp.config("tsc", tsls_config)
 vim.lsp.config("tailwindcss", { root_markers = { "tailwind.config.js" } })
 vim.lsp.enable({
 	"oxlint",
 	"eslint",
 	"lua_ls",
-	"tsc",
-	-- "vtsls"
+	"vtsls",
 	"gopls",
 })
 
@@ -110,7 +121,6 @@ local toggle_inlay_hints = function()
 	print(string.format("%s inlay hints", state))
 end
 
-local patched_clients = {}
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local bufnr = ev.buf
@@ -120,35 +130,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local map = function(keys, func)
 			vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false })
-		end
-
-		-- Workaround: tsgo sends a `[Symbol]` completion whose textEdit replaces
-		-- the `.`, which drags the client's start column back and filters out
-		-- every other item. Drop items whose edit starts before the cursor.
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client and client.name == "tsc" and not patched_clients[client.id] then
-			patched_clients[client.id] = true
-
-			local request = client.request
-			client.request = function(self, method, params, handler, ...)
-				if method == "textDocument/completion" and handler then
-					local orig = handler
-					handler = function(err, result, ...)
-						if result then
-							local list = result.items and result or { items = result }
-							local pos = params.position
-							list.items = vim.tbl_filter(function(item)
-								local te = item.textEdit
-								local r = te and (te.range or te.insert)
-								return not (r and r.start.line == pos.line and r.start.character < pos.character)
-							end, list.items)
-							result = result.items and list or list.items
-						end
-						return orig(err, result, ...)
-					end
-				end
-				return request(self, method, params, handler, ...)
-			end
 		end
 
 		map("]g", function()
