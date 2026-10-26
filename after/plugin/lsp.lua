@@ -8,30 +8,6 @@ vim.diagnostic.config({
 	},
 })
 
-vim.lsp.config("jdtls", {
-	settings = {
-		redhat = {
-			telemetry = {
-				enabled = false,
-			},
-		},
-		java = {
-			import = {
-				gradle = {
-					enabled = false,
-				},
-			},
-			jdt = {
-				ls = {
-					androidSupport = {
-						enabled = false,
-					},
-				},
-			},
-		},
-	},
-})
-
 vim.lsp.config("lua_ls", {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
