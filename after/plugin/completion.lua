@@ -4,5 +4,10 @@ require("mini.completion").setup({
 })
 
 vim.opt.completeopt = { "noinsert", "menuone", "noselect" }
-vim.cmd([[au FileType snacks_picker_input lua vim.b.minicompletion_disable = true]])
-vim.cmd([[au FileType snacks_input lua vim.b.minicompletion_disable = true]])
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("custom-minicompletion-disable", { clear = true }),
+	pattern = { "snacks_picker_input", "snacks_input" },
+	callback = function()
+		vim.b.minicompletion_disable = true
+	end,
+})
