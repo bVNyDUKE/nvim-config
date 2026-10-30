@@ -265,7 +265,17 @@ local function toggle_arrow_function()
 end
 
 vim.api.nvim_create_user_command("ToggleArrowFunction", toggle_arrow_function, {})
-vim.keymap.set("n", "<leader>cf", toggle_arrow_function, { desc = "Toggle arrow function / named function" })
-
 vim.api.nvim_create_user_command("ToggleArrowBraces", toggle_arrow_braces, {})
-vim.keymap.set("n", "<leader>cb", toggle_arrow_braces, { desc = "Add/remove arrow function braces" })
+
+-- keymaps only in the filetypes the toggles support
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("custom-arrow-to-function", { clear = true }),
+	pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+	callback = function(args)
+		local map = function(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, { buffer = args.buf, desc = desc })
+		end
+		map("<leader>cf", toggle_arrow_function, "Toggle arrow function / named function")
+		map("<leader>cb", toggle_arrow_braces, "Add/remove arrow function braces")
+	end,
+})
