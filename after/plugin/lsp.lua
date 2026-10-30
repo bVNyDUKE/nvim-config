@@ -78,6 +78,7 @@ vim.lsp.config("vtsls", {
 		typescript = js_inlay_hints,
 		javascript = js_inlay_hints,
 		vtsls = {
+			autoUseWorkspaceTsdk = true,
 			tsserver = {
 				globalPlugins = {
 					{
