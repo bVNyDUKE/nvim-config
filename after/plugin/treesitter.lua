@@ -1,18 +1,20 @@
-require("nvim-treesitter").install({
-	"typescript",
-	"tsx",
-	"javascript",
-	"vue",
-	"go",
-	"gomod",
-	"lua",
-	"json",
-	"yaml",
-	"html",
-	"css",
-	"markdown",
-	"markdown_inline",
-})
+vim.api.nvim_create_user_command("TSInstallMine", function()
+	require("nvim-treesitter").install({
+		"typescript",
+		"tsx",
+		"javascript",
+		"vue",
+		"go",
+		"gomod",
+		"lua",
+		"json",
+		"yaml",
+		"html",
+		"css",
+		"markdown",
+		"markdown_inline",
+	})
+end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
