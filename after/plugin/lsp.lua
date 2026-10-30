@@ -154,3 +154,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end)
 	end,
 })
+
+vim.api.nvim_create_user_command("LspCheck", function()
+	vim.cmd.checkhealth("lsp")
+end, { desc = "Check status of LSP servers" })
+
+vim.api.nvim_create_user_command("LspLog", function()
+	vim.api.nvim_cmd({
+		cmd = "tabedit",
+		args = { vim.lsp.log.get_filename() },
+		magic = { file = false, bar = false },
+	}, {})
+end, { desc = "Open the LSP log file" })
