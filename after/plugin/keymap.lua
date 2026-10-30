@@ -1,6 +1,6 @@
 vim.keymap.set("i", "jj", "<Esc>")
 vim.keymap.set("n", "<leader>w", "<Cmd>update<CR>")
-vim.keymap.set("n", "<c-x>", ":Ex<CR>")
+vim.keymap.set("n", "<leader>x", ":Ex<CR>")
 vim.keymap.set("n", "<leader>nt", ":tabnew<CR>")
 vim.keymap.set("n", "<leader>sv", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>sh", ":split<CR>")

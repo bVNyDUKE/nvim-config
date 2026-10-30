@@ -130,14 +130,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 
 		local map = function(keys, func)
-			vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false })
+			vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false, nowait = true })
 		end
 
 		map("]g", function()
-			vim.diagnostic.jump({ count = 1, float = true })
+			vim.diagnostic.jump({ count = 1 })
 		end)
 		map("[g", function()
-			vim.diagnostic.jump({ count = -1, float = true })
+			vim.diagnostic.jump({ count = -1 })
 		end)
 		map("<leader>ca", vim.lsp.buf.code_action)
 		map("<leader>vr", vim.lsp.buf.references)
