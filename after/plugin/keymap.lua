@@ -9,13 +9,6 @@ vim.keymap.set("n", "<leader>k", "<C-w>k")
 vim.keymap.set("n", "<leader>l", "<C-w>l")
 vim.keymap.set("n", "<leader>h", "<C-w>h")
 
--- unbind default lsp
-vim.keymap.del("n", "grn")
-vim.keymap.del({ "n", "v" }, "gra")
-vim.keymap.del("n", "grr")
-vim.keymap.del("n", "gri")
-vim.keymap.del("n", "gO")
-
 -- modifier key is either Alt or Ctrl
 local mod = "C"
 
