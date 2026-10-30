@@ -14,17 +14,13 @@ Plug("mason-org/mason.nvim")
 Plug("neovim/nvim-lspconfig")
 
 -- Formatting
-Plug("nvimtools/none-ls.nvim")
 Plug("stevearc/conform.nvim")
 
 -- Autocompletion
 Plug("echasnovski/mini.icons", { branch = "stable" })
 Plug("echasnovski/mini.completion", { branch = "stable" })
 
-Plug("nvim-lua/plenary.nvim")
-
 Plug("folke/snacks.nvim")
-Plug("nvim-lualine/lualine.nvim")
 Plug("lewis6991/gitsigns.nvim")
 
 Plug("tpope/vim-fugitive")
