@@ -87,6 +87,7 @@ vim.lsp.config("vtsls", {
 							.. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
 						languages = { "vue" },
 						configNamespace = "typescript",
+						enableForWorkspaceTypeScriptVersions = true,
 					},
 				},
 			},
@@ -103,7 +104,6 @@ vim.lsp.enable({
 	"vtsls",
 	"gopls",
 	"vue_ls",
-	"tailwindcss",
 })
 
 local toggle_inlay_hints = function()
