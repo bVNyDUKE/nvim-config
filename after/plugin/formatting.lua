@@ -1,6 +1,6 @@
 require("conform").setup({
 	formatters_by_ft = {
-		go = { "gofmt" },
+		go = { lsp_format = "prefer" },
 		lua = { "stylua" },
 		javascript = { "prettier" },
 		javascriptreact = { "prettier" },
