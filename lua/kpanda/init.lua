@@ -3,6 +3,7 @@ require("kpanda.vimplug")
 
 require("kanagawa").setup({
 	theme = "wave",
+	compile = true,
 	overrides = function()
 		return {
 			NormalFloat = { bg = "none" },

@@ -19,7 +19,7 @@ require("lualine").setup({
 				symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
 			},
 			"encoding",
-			{ "filetype", icon_only = true },
+			{ "filetype", icon_only = true, colored = false },
 		},
 		lualine_y = {},
 		lualine_z = {},
