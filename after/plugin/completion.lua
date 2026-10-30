@@ -1,5 +1,6 @@
 require("mini.completion").setup({
 	lsp_completion = { source_func = "omnifunc", auto_setup = false },
+	delay = { completion = 200, info = 200, signature = 100 },
 })
 
 vim.opt.completeopt = { "noinsert", "menuone", "noselect" }
