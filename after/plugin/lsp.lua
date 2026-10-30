@@ -95,14 +95,6 @@ vim.lsp.config("vtsls", {
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 })
 
-vim.lsp.config("cssls", {
-	settings = {
-		css = {
-			validate = false,
-		},
-	},
-})
-
 vim.lsp.config("tailwindcss", { root_markers = { "tailwind.config.js" } })
 vim.lsp.enable({
 	"oxlint",
@@ -110,6 +102,8 @@ vim.lsp.enable({
 	"lua_ls",
 	"vtsls",
 	"gopls",
+	"vue_ls",
+	"tailwindcss",
 })
 
 local toggle_inlay_hints = function()
