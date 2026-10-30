@@ -17,18 +17,6 @@ Snacks.setup(
 				buffers = {
 					supports_live = false,
 				},
-				files = {
-					hidden = true,
-					include = { ".gitignore", ".env", ".env.local", ".skaffold.env" },
-					matcher = {
-						fuzzy = false,
-					},
-				},
-				git_branches = {
-					matcher = {
-						fuzzy = false,
-					},
-				},
 				explorer = {
 					hidden = true,
 					ignored = true,
