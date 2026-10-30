@@ -72,9 +72,10 @@ end
 --- @param levels {color: function, symbol: string, level: vim.diagnostic.Severity}[]
 --- @return string[]
 local getLevels = function(levels)
+	local counts = vim.diagnostic.count(0)
 	local res = {}
 	for _, value in ipairs(levels) do
-		local count = #vim.diagnostic.get(0, { severity = value.level })
+		local count = counts[value.level] or 0
 		if count > 0 then
 			table.insert(res, value.color(table.concat({ " ", value.symbol, ":", count, " " })))
 		end
