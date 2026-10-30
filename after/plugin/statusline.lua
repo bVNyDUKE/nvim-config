@@ -133,24 +133,4 @@ vim.api.nvim_exec2(
 	{}
 )
 
--- filetypes that get an empty statusline (fugitive panels, snacks explorer sidebar)
-local hidden_filetypes = {
-	fugitive = true,
-	fugitiveblame = true,
-	git = true,
-	gitcommit = true,
-	gitrebase = true,
-	snacks_layout_box = true,
-}
-
-local statusline_str = table.concat(statusline, "")
-
-function _G._statusline()
-	local buf = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
-	if hidden_filetypes[vim.bo[buf].filetype] then
-		return "%#Normal#"
-	end
-	return statusline_str
-end
-
-vim.o.statusline = "%!v:lua._statusline()"
+vim.o.statusline = table.concat(statusline, "")
