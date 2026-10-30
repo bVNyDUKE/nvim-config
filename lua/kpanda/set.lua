@@ -40,6 +40,7 @@ set.pumblend = 10 -- make builtin completion menus slightly transparent
 set.winborder = "rounded"
 set.list = true -- show whitespace and control chars
 
+vim.o.laststatus = 3 --one global statusline
 vim.g.mapleader = " "
 vim.g.netrw_banner = 0
 vim.g.loaded_gzip = 1
