@@ -22,18 +22,18 @@ gs.setup({
 				vim.cmd.normal({ "[c", bang = true })
 			else
 				---@diagnostic disable-next-line
-				gs.nav_hunk("prev")
+				gs.nav_hunk("prev", { wrap = true })
 			end
 		end)
 
 		map("n", "ghs", gs.stage_hunk)
 		map("n", "ghu", gs.reset_hunk)
 
-		map("v", "<leader>hs", function()
+		map("v", "ghs", function()
 			gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 		end)
 
-		map("v", "<leader>hr", function()
+		map("v", "ghu", function()
 			gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 		end)
 
