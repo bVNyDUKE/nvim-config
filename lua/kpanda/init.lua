@@ -1,5 +1,5 @@
 require("kpanda.set")
-require("kpanda.vimplug")
+require("kpanda.pack")
 
 require("kanagawa").setup({
 	theme = "wave",

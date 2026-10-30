@@ -24,7 +24,7 @@ set.number = true -- add line numbers
 set.relativenumber = true -- relative line numbers
 -- set.wildmode = "list:longest,list:full" -- get bash-like tab completions
 set.wildmode = "longest:full,full" -- get bash-like tab completions
-set.wildignore:append({ "**/node_modules/**", "**/.git/**", "./plugged/**", "./tmp" })
+set.wildignore:append({ "**/node_modules/**", "**/.git/**", "./tmp" })
 set.mouse = "a" -- enable mouse click
 set.clipboard = "unnamedplus" -- using system clipboard
 set.ttyfast = true -- Speed up scrolling in Vim

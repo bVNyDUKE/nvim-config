@@ -24,7 +24,7 @@ vim.lsp.config("lua_ls", {
 				version = "LuaJIT",
 			},
 			workspace = {
-				ignoreDir = { ".git", "plugged", "autoload" },
+				ignoreDir = { ".git", "autoload" },
 				checkThirdParty = false,
 				library = { vim.env.VIMRUNTIME },
 			},
