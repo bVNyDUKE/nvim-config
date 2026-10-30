@@ -17,6 +17,7 @@ vim.api.nvim_create_user_command("TSInstallMine", function()
 end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("custom-treesitter-start", { clear = true }),
 	callback = function(args)
 		-- returns false/errors if there is no parser for this filetype
 		if not pcall(vim.treesitter.start, args.buf) then
