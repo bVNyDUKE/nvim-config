@@ -127,7 +127,7 @@ vim.api.nvim_exec2(
 	[[
     augroup Statusline
     au!
-    au WinEnter,BufEnter * redrawstatus
+    au DiagnosticChanged * redrawstatus
     augroup END
 ]],
 	{}
